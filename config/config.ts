@@ -8,7 +8,7 @@ let key: {
     publicKey: string;
 };
 
-const usdcContractAddress = '0x07865c6E87B9F70255377e024ace6630C1Eaa37F'
+const usdcContractAddress =  '0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8'
 
 const initReddio = () => {
     if (typeof window !== 'undefined' && !reddio) {
@@ -29,14 +29,16 @@ const depositUSDC = async (amount: number) => {
     const tx = await reddio.erc20.approve({
         tokenAddress: usdcContractAddress,
         amount,
-    });
-    await tx.wait();
+    }); 
+    await tx.wait()
+    await generateKey()
     return reddio.apis.depositERC20({
         starkKey: key.publicKey,
         quantizedAmount: amount,
         tokenAddress: usdcContractAddress,
     });
 }
+
 
 const withdrawUSDC = async (amount: number) => {
     const params: SignTransferParams = {

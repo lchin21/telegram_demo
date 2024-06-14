@@ -2,13 +2,13 @@ import '@/styles/globals.css'
 import './style/styles.css';
 import '@rainbow-me/rainbowkit/styles.css';
 import type { AppProps } from 'next/app'
-import {configureChains, goerli} from "@wagmi/core";
+import {configureChains, sepolia} from "@wagmi/core";
 import {getDefaultWallets, RainbowKitProvider} from "@rainbow-me/rainbowkit";
 import {createClient, WagmiConfig} from "wagmi";
 import { publicProvider } from 'wagmi/providers/public'
 
 const { chains, provider } = configureChains(
-    [goerli],
+    [sepolia],
     [
       publicProvider()
     ],
