@@ -8,10 +8,6 @@ export default function WithdrawArea() {
 
     const value = data?.data[0]?.display_value || 0
 
-    // for (let i=0; i<data?.data.length!; i++) {
-    //     console.log(data?.data[1].amount)
-    // }
-
     const [amount, setAmount] = useState('')
     const withdraw = useCallback(
         async (type: any) => {
@@ -24,14 +20,21 @@ export default function WithdrawArea() {
         [data?.data],
     );
 
-    return <div>
-        <p className="Text">
-            You can withdraw {value} USDC to your wallet here.
-        </p>
-        <div
-            style={{ display: 'flex', marginTop: 20, justifyContent: 'flex-end' }}
-        >
-            <button className="Button green" onClick={withdraw}>Withdraw</button>
-        </div>
-    </div>
+    const transactions = data?.data
+
+    const transactionList = transactions!.map((transactions) =>
+        <li>{transactions}</li>
+    );
+    // return <div>
+    //     <p className="Text">
+    //         You can withdraw {value} USDC to your wallet here.
+    //     </p>
+    //     <div
+    //         style={{ display: 'flex', marginTop: 20, justifyContent: 'flex-end' }}
+    //     >
+    //         <button className="Button green" onClick={withdraw}>Withdraw</button>
+    //     </div>
+    // </div>
+
+
 }

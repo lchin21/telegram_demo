@@ -1,6 +1,9 @@
-import {Reddio, SignTransferParams} from "@reddio.com/js";
+import {Reddio, SignTransferParams, RecordsParams, StarkKeyParams} from "@reddio.com/js";
 import {ethers} from "ethers";
-import {getAccount} from "@wagmi/core";
+import {getAccount, SendTransactionResult} from "@wagmi/core";
+import {arrayOutputType} from "zod";
+import Modal from "../components/modal"
+import {useState} from "react";
 
 let reddio: Reddio;
 let key: {
@@ -68,6 +71,15 @@ const getWithdrawArea = async () => {
     return data
 }
 
+//essentially withdrawToWallet but uses chosen address
+const getTransferApproveArea = async (address: string) => {
+    const { data } = await reddio.apis.withdrawalStatus({
+        ethaddress: address!,
+        stage: 'withdrawarea',
+    });
+    return data
+}
+
 const withdrawToWallet = async (item: any) => {
     return reddio.apis.withdrawalFromL1({
         ethAddress: getAccount().address!,
@@ -76,4 +88,55 @@ const withdrawToWallet = async (item: any) => {
     });
 }
 
-export { initReddio, generateKey, depositUSDC, getBalance, withdrawUSDC, getWithdrawArea, withdrawToWallet }
+const transfer = async (amount: number, receiver: string): Promise<any> => {
+    const params: SignTransferParams = {
+        starkKey: key.publicKey,
+        privateKey: key.privateKey,
+        amount,
+        receiver: receiver!,
+        type: 'ERC20',
+        contractAddress: usdcContractAddress,
+    };
+    return reddio.apis.transfer(params)
+}
+
+const records = async ()  => {
+
+    const params: RecordsParams = {
+        starkKey: '0x1e6c020796cfda4a88178817361647376df8a2415404e5a7cf6784bd3b0fbb4',
+    };
+
+    try {
+        const response = await reddio.apis.getRecords(params);
+        const responseData = response.data.data;
+        const list = responseData.list;
+
+        console.log(typeof list);
+        return list;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+const checkWithdrawals = async () => {
+    return
+}
+
+
+//Not tested yet
+// const send = async (amount: number, receiver: string): Promise<any> => {
+//     const params: SignTransferParams = {
+//         starkKey: key.publicKey,
+//         privateKey: key.privateKey,
+//         amount,
+//         receiver: receiver!,
+//         type: 'ERC20',
+//         contractAddress: usdcContractAddress,
+//     };
+//     return reddio.apis.withdrawalFromL2(params)
+// }
+
+
+
+export { initReddio, generateKey, depositUSDC, getBalance, withdrawUSDC, getWithdrawArea, withdrawToWallet, transfer, getTransferApproveArea, records }

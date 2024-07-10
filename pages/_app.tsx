@@ -7,6 +7,7 @@ import {getDefaultWallets, RainbowKitProvider} from "@rainbow-me/rainbowkit";
 import {createClient, WagmiConfig} from "wagmi";
 import { publicProvider } from 'wagmi/providers/public'
 
+
 const { chains, provider } = configureChains(
     [sepolia],
     [
