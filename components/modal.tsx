@@ -25,7 +25,6 @@ export function Modal({ children, title, customButton }: ModalProps): React.JSX.
             </div>
           </Dialog.Description>
 
-          {/* Conditional rendering of customButton */}
           {customButton && (
             <div style={{ display: 'flex', marginTop: 25, justifyContent: 'center' }}>
               <Dialog.Close asChild>
@@ -36,7 +35,6 @@ export function Modal({ children, title, customButton }: ModalProps): React.JSX.
             </div>
           )}
 
-          {/* Default close button */}
           <Dialog.Close asChild>
             <button className="IconButton" aria-label="Close">
               <Cross2Icon />

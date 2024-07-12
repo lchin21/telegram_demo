@@ -1,5 +1,5 @@
-import React, {useCallback, useEffect, useState} from "react";
-import {getBalance, getWithdrawArea, records, withdrawToWallet} from "@/config/config";
+import React from "react";
+import { records } from "@/config/config";
 import useSWR from "swr";
 import { format } from "date-fns";
 import {ethers} from "ethers";
@@ -34,42 +34,40 @@ function historyCard(amount: number, type: number, time: number) {
 
 export default function History(): React.JSX.Element {
 
-    // const { data } = useSWR('history', records);
-    // const list = data ? data.map(x => x) : [];
+    const { data } = useSWR('history', records);
+    const list = data ? data.map(x => x) : [];
 
-    const { data } = useSWR('getWithdrawArea', getWithdrawArea)
-    console.log(data?.data[0]);
 
     //lines 72 - 85 should work
-    // let elementsList = [];
-    //
-    // for (let i = 0; i < 20 && i < list.length; i++) {
-    //     if (list[i]) {
-    //         elementsList.push({
-    //             type: list[i].record_type,
-    //             // @ts-ignore
-    //             amount: list[i].display_value,
-    //             date: list[i].time,
-    //         });
-    //     }
-    // }
-    //
-    // console.log(elementsList)
-    //
-    // let importantInfoList = elementsList.map(x => historyCard(
-    //     x.amount,
-    //     x.type,
-    //     x.date,
-    // ))
-    // console.log(importantInfoList)
+    let elementsList = [];
+
+    for (let i = 0; i < 20 && i < list.length; i++) {
+        if (list[i]) {
+            elementsList.push({
+                type: list[i].record_type,
+                // @ts-ignore
+                amount: list[i].display_value,
+                date: list[i].time,
+            });
+        }
+    }
+
+    console.log(elementsList)
+
+    let importantInfoList = elementsList.map(x => historyCard(
+        x.amount,
+        x.type,
+        x.date,
+    ))
+    console.log(importantInfoList)
 
 return <div>
     <h1 className="text-xl font-bold leading-none text-black mb-3">Latest Transactions</h1>
-    {/*<div style={{maxHeight: "320px", overflowY: "auto", scrollbarWidth: "none", msOverflowStyle: "none", }}>*/}
-    {/*    <ol className="divide-y divide-gray-200 dark:divide-gray-700">*/}
-    {/*    {importantInfoList}*/}
-    {/*</ol>*/}
-    {/*</div>*/}
+    <div style={{maxHeight: "320px", overflowY: "auto", scrollbarWidth: "none", msOverflowStyle: "none", }}>
+        <ol className="divide-y divide-gray-200 dark:divide-gray-700">
+        {importantInfoList}
+    </ol>
+    </div>
 </div>
 
 

@@ -8,10 +8,6 @@ export default function WithdrawArea() {
 
     const value = data?.data[0]?.display_value || 0
 
-    // for (let i=0; i<data?.data.length!; i++) {
-    //     console.log(data?.data[1].amount)
-    // }
-
     const [amount, setAmount] = useState('')
     const withdraw = useCallback(
         async (type: any) => {

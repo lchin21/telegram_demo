@@ -49,43 +49,6 @@ const TabsDemo = () => {
             <Modal title="Approve">Approve</Modal>
             <Modal title="History"><History/></Modal>
         </div>
-        {/*<div className={'flex justify-center h-12'}>*/}
-        {/*  <Balance />*/}
-        {/*</div>*/}
-        {/*<div className={'flex justify-center h-12'}>*/}
-        {/*  <Button>Test</Button>*/}
-        {/*</div>*/}
-        {/*<div className='flex justify-center items-center '>*/}
-        {/*  <Tabs.Root className="TabsRoot" defaultValue="tab1">*/}
-        {/*    <Tabs.List className="TabsList" aria-label="Manage your account">*/}
-        {/*      <Tabs.Trigger className="TabsTrigger" value="tab1">*/}
-        {/*        Deposit*/}
-        {/*      </Tabs.Trigger>*/}
-        {/*      <Tabs.Trigger className="TabsTrigger" value="tab2">*/}
-        {/*        Withdraw*/}
-        {/*      </Tabs.Trigger>*/}
-        {/*      <Tabs.Trigger className="TabsTrigger" value="tab3">*/}
-        {/*        Withdraw Area*/}
-        {/*      </Tabs.Trigger>*/}
-        {/*      <Tabs.Trigger className="TabsTrigger" value="tab4">*/}
-        {/*        Balance*/}
-        {/*      </Tabs.Trigger>*/}
-        {/*    </Tabs.List>*/}
-        {/*    <Tabs.Content className="TabsContent" value="tab1">*/}
-        {/*      <Deposit />*/}
-        {/*    </Tabs.Content>*/}
-        {/*    <Tabs.Content className="TabsContent" value="tab2">*/}
-        {/*      <Transfer />*/}
-        {/*    </Tabs.Content>*/}
-        {/*    <Tabs.Content className="TabsContent" value="tab3">*/}
-        {/*      <WithdrawArea />*/}
-        {/*    </Tabs.Content>*/}
-        {/*    <Tabs.Content className="TabsContent" value="tab4">*/}
-        {/*      /!*<Balance />*!/*/}
-        {/*      <History />*/}
-        {/*    </Tabs.Content>*/}
-        {/*  </Tabs.Root>*/}
-        {/*</div>*/}
       </main>
   )
 }

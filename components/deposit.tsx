@@ -21,22 +21,6 @@ export default function Deposit() {
         setAmount(value);
     }
 
-    // return <div>
-    //     <p className="Text">
-    //         You can deposit USDC to your account here.
-    //     </p>
-    //     <fieldset className="Fieldset">
-    //         <label className="Label" htmlFor="amount">
-    //             Amount
-    //         </label>
-    //         <input className="Input" id="amount" onChange={e => setAmount(e.target.value) } />
-    //     </fieldset>
-    //     <div
-    //         style={{ display: 'flex', marginTop: 20, justifyContent: 'flex-end' }}
-    //     >
-    //         <button className="Button green" onClick={deposit}>Deposit</button>
-    //     </div>
-    // </div>
 
     return(
         <Modal title="Deposit" customButton={
