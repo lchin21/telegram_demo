@@ -40,7 +40,6 @@ export default function History(): React.JSX.Element {
     const list = data ? data.map(x => x) : [];
 
 
-    //lines 72 - 85 should work
     let elementsList = [];
 
     for (let i = 0; i < 20 && i < list.length; i++) {
