@@ -124,9 +124,8 @@ const records = async ()  => {
     }
 }
 
-const checkWithdrawals = async () => {
-    return
-}
+
+
 
 
 //Not tested yet
@@ -144,4 +143,4 @@ const checkWithdrawals = async () => {
 
 
 
-export { initReddio, generateKey, depositUSDC, getBalance, withdrawUSDC, getWithdrawArea, withdrawToWallet, transfer, getTransferApproveArea, records }
+export { initReddio, generateKey, depositUSDC, getBalance, withdrawUSDC, getWithdrawArea, withdrawToWallet, transfer, getTransferApproveArea, records, key }
