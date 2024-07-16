@@ -5,16 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97bc6d90-8b17-42cc-a721-0ec847eb3939" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/components/balance.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/balance.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/deposit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/deposit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/withdraw.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/withdraw.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/withdrawArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/withdrawArea.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/approvalArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/approvalArea.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/dynamicEntryField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/dynamicEntryField.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/modal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/modal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/transfer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/transfer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/style/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/pages/style/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +42,7 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/davispham1/usdc-demo.git&quot;,
+    &quot;url&quot;: &quot;https://github.com/lchin21/telegram_demo&quot;,
     &quot;accountId&quot;: &quot;c2b50a1b-65ca-4788-a59c-4af069880597&quot;
   }
 }</component>
@@ -58,20 +55,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "branch",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Users\\lchin\\IdeaProjects\\usdc-demo\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\lchin\\IdeaProjects\\telegram_demo\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -102,6 +99,8 @@
       <workItem from="1720148095971" duration="17914000" />
       <workItem from="1720406307447" duration="24765000" />
       <workItem from="1720643291573" duration="333000" />
+      <workItem from="1720754942515" duration="342000" />
+      <workItem from="1721069486058" duration="4174000" />
     </task>
     <servers />
   </component>

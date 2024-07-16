@@ -19,14 +19,14 @@ export function Modal({ children, title, customButton }: ModalProps): React.JSX.
         <Dialog.Overlay className="DialogOverlay" />
         <Dialog.Content className="DialogContent" style={{width: '100vw', height: '100vh', maxHeight: '100%', maxWidth: '100%'}}>
           <Dialog.Title className="DialogTitle">{title}</Dialog.Title>
-          <Dialog.Description className="DialogDescription">
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Dialog.Description className="DialogDescription justify-center">
+            <div style={{ display: 'flex', justifyContent: 'center', flexDirection: "column", alignItems: "center" }}>
               {children}
             </div>
           </Dialog.Description>
 
           {customButton && (
-            <div style={{ display: 'flex', marginTop: 25, justifyContent: 'center' }}>
+            <div style={{ display: 'flex', marginTop: 25, justifyContent: 'center'}}>
               <Dialog.Close asChild>
                 <div>
                   {customButton}

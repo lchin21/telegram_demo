@@ -12,6 +12,7 @@ import Button from "@/components/buttons";
 import Transfer from "@/components/transfer";
 import History from "@/components/history";
 import Modal from "@/components/modal";
+import ApprovalArea from "@/components/approvalArea";
 
 let isInit = false
 
@@ -46,8 +47,9 @@ const TabsDemo = () => {
             {/*    <Deposit/></Modal>*/}
             <Deposit/>
             <Withdraw/>
-            <Modal title="Approve">Approve</Modal>
+            <ApprovalArea/>
             <Modal title="History"><History/></Modal>
+            <Transfer/>
         </div>
       </main>
   )

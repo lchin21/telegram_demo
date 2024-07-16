@@ -3,9 +3,11 @@ import React, { useState, useRef, useEffect, ChangeEvent } from 'react';
 interface DynamicWidthInputProps {
   initialValue?: string;
   onChange: (value: string) => void;
+  defaultValue?: string;
+  minWidth?: string
 }
 
-const DynamicWidthInput: React.FC<DynamicWidthInputProps> = ({ initialValue = '', onChange}) => {
+const DynamicWidthInput: React.FC<DynamicWidthInputProps> = ({ initialValue = '', onChange, defaultValue = "0", minWidth= "15px"}) => {
   const [content, setContent] = useState<string>('');
   const [inputWidth, setInputWidth] = useState<string>('auto');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -39,8 +41,8 @@ const DynamicWidthInput: React.FC<DynamicWidthInputProps> = ({ initialValue = ''
       <input
         type="text"
         ref={inputRef}
-        style={{ width: inputWidth, minWidth: '15px', fontSize: '24px', maxWidth: '100%' }}
-        placeholder="0"
+        style={{ width: inputWidth, minWidth: minWidth, fontSize: '24px', maxWidth: '100%' }}
+        placeholder= {defaultValue}
         value={content}
         onChange={changeHandler}
         className="border-none focus:outline-none"

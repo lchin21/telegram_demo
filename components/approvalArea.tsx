@@ -2,8 +2,9 @@ import React, {useCallback, useState} from "react";
 import {getBalance, getWithdrawArea, withdrawToWallet, withdrawUSDC} from "@/config/config";
 import useSWR from "swr";
 import {ethers} from "ethers";
+import Modal from "@/components/modal";
 
-export default function WithdrawArea() {
+export default function ApprovalArea() {
     const { data } = useSWR('getWithdrawArea', getWithdrawArea)
 
     const value = data?.data[0]?.display_value || 0
@@ -20,21 +21,22 @@ export default function WithdrawArea() {
         [data?.data],
     );
 
-    const transactions = data?.data
 
-    const transactionList = transactions!.map((transactions) =>
-        <li>{transactions}</li>
-    );
-    // return <div>
-    //     <p className="Text">
-    //         You can withdraw {value} USDC to your wallet here.
-    //     </p>
-    //     <div
-    //         style={{ display: 'flex', marginTop: 20, justifyContent: 'flex-end' }}
-    //     >
-    //         <button className="Button green" onClick={withdraw}>Withdraw</button>
-    //     </div>
-    // </div>
+    return <Modal title={"Approve"} customButton={
+        <button className="Button green flex justify-center ml-0" onClick={withdraw}>
+        Approve
+        </button>
+        }>
+        <div>
+        <p className="Text">
+            You can withdraw {value} USDC to your wallet here.
+            </p>
+            <div
+                style={{display: 'flex', marginTop: 20, justifyContent: 'flex-end'}}
+            >
+            </div>
+        </div>
+    </Modal>
 
 
 }

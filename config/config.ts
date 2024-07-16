@@ -88,11 +88,11 @@ const withdrawToWallet = async (item: any) => {
     });
 }
 
-const transfer = async (amount: number, receiver: string): Promise<any> => {
+const transfer = async (amount: string, receiver: string): Promise<any> => {
     const params: SignTransferParams = {
         starkKey: key.publicKey,
         privateKey: key.privateKey,
-        amount,
+        amount: amount,
         receiver: receiver!,
         type: 'ERC20',
         contractAddress: usdcContractAddress,

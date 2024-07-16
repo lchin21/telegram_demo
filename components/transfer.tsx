@@ -2,6 +2,8 @@ import React, {useCallback, useState} from "react";
 import {getBalance, transfer} from "@/config/config";
 import useSWR from "swr";
 import {ethers} from "ethers";
+import Modal from "@/components/modal";
+import DynamicWidthInput from "@/components/dynamicEntryField";
 
 export default function Transfer() {
     const { data } = useSWR('balance', getBalance)
@@ -13,7 +15,7 @@ export default function Transfer() {
     const transfer2 = useCallback(
         async (type: any) => {
             try {
-                await transfer(Number(amount), address)
+                await transfer(amount, address)
             } catch (e) {
                 console.log(e);
             }
@@ -21,25 +23,31 @@ export default function Transfer() {
         [amount],
     );
 
-    return <div>
-        <p className="Text">
-            You can transfer up to {ethers.utils.formatUnits(balanceData?.balance_available || 0, balanceData?.decimals)} USDC here.
-        </p>
-        <fieldset className="Fieldset">
-            <label className="Label" htmlFor="amount">
-                Amount
-            </label>
-            <input className="Input" id="amount" onChange={e => setAmount(e.target.value) } />
+    const [inputValue, setInputValue] = useState("");
 
-            <label className="Label" htmlFor="address" style={{marginTop: 20}}>
-                Address
-            </label>
-            <input className="Input" id="address" onChange={e => setAddress(e.target.value) } />
-        </fieldset>
-        <div
-            style={{ display: 'flex', marginTop: 20, justifyContent: 'flex-end' }}
-        >
-            <button className="Button green" onClick={transfer2}>Send</button>
+    const handleInputChange = (value: string) => {
+        setAmount(value);
+    }
+
+    const handleInputKeyChange = (value: string) => {
+        setAddress(value);
+    }
+
+
+    return <Modal title={"Transfer"} customButton={
+        <button className="Button green flex justify-center ml-0" onClick={transfer2}>
+            Transfer
+        </button>
+    }>
+        <div className="flex items-center">
+            <DynamicWidthInput onChange={handleInputChange}></DynamicWidthInput>
+            <label htmlFor="inputField" className="ml-1 text-2xl">USDC</label>
         </div>
-    </div>
+        <div className="flex items-center mt-3">
+            <DynamicWidthInput onChange={handleInputKeyChange} defaultValue={"StarkKey"}
+                               minWidth={"90px"}></DynamicWidthInput>
+        </div>
+
+
+    </Modal>
 }
