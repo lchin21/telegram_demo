@@ -62,7 +62,7 @@ const DynamicWidthInput: React.FC<DynamicWidthInputProps> = ({ initialValue = ''
         {content || ' '}
       </span>
       <input
-        type="text"
+        type="tel"
         ref={inputRef}
         style={{ width: inputWidth, minWidth: minWidth, fontSize: '24px', maxWidth: '100%'}}
         placeholder= {defaultValue}

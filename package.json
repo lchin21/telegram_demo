@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@particle-network/connectkit": "^1.4.8",
     "@radix-ui/colors": "^2.0.1",
     "@radix-ui/react-dialog": "^1.1.1",
     "@radix-ui/react-tabs": "^1.0.4",

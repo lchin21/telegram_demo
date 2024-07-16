@@ -128,19 +128,6 @@ const records = async ()  => {
 
 
 
-//Not tested yet
-// const send = async (amount: number, receiver: string): Promise<any> => {
-//     const params: SignTransferParams = {
-//         starkKey: key.publicKey,
-//         privateKey: key.privateKey,
-//         amount,
-//         receiver: receiver!,
-//         type: 'ERC20',
-//         contractAddress: usdcContractAddress,
-//     };
-//     return reddio.apis.withdrawalFromL2(params)
-// }
-
 
 
 export { initReddio, generateKey, depositUSDC, getBalance, withdrawUSDC, getWithdrawArea, withdrawToWallet, transfer, getTransferApproveArea, records, key }

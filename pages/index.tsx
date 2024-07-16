@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react'
-import { ConnectButton } from '@rainbow-me/rainbowkit';
+// import { ConnectButton } from '@rainbow-me/rainbowkit';
+import {ConnectButton} from "@particle-network/connectkit";
 import * as Tabs from '@radix-ui/react-tabs'
 import * as Dialog from '@radix-ui/react-dialog';
 import Deposit from "@/components/deposit";
@@ -32,12 +33,13 @@ const TabsDemo = () => {
   return (
       <main className='h-screen bg-gray-100'>
         <header className='h-[50px] flex justify-center mb-5 mt-0'>
-          <ConnectButton
-          showBalance={false}
-          accountStatus={{
-            smallScreen: 'avatar',
-            largeScreen: 'avatar',
-          }}/>
+          {/*<ConnectButton*/}
+          {/*showBalance={false}*/}
+          {/*accountStatus={{*/}
+          {/*  smallScreen: 'avatar',*/}
+          {/*  largeScreen: 'avatar',*/}
+          {/*}}/>*/}
+            <ConnectButton/>
         </header>
           <div className='flex justify-center mb-7 mt-0 text-5xl text-black'>
               <BalanceNumber/>
