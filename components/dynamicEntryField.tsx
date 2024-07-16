@@ -5,9 +5,10 @@ interface DynamicWidthInputProps {
   onChange: (value: string) => void;
   defaultValue?: string;
   minWidth?: string
+  entryType: string
 }
 
-const DynamicWidthInput: React.FC<DynamicWidthInputProps> = ({ initialValue = '', onChange, defaultValue = "0", minWidth= "15px"}) => {
+const DynamicWidthInput: React.FC<DynamicWidthInputProps> = ({ initialValue = '', onChange, defaultValue = "0", minWidth= "15px", entryType}) => {
   const [content, setContent] = useState<string>('');
   const [inputWidth, setInputWidth] = useState<string>('auto');
   const inputRef = useRef<HTMLInputElement>(null);
@@ -29,7 +30,8 @@ const DynamicWidthInput: React.FC<DynamicWidthInputProps> = ({ initialValue = ''
       onChange(value);
   };
 
-  return (
+  if (entryType === 'text') {
+      return (
     <div className="wrapper" style={{ position: 'relative' }}>
       <span
         id="hide"
@@ -41,7 +43,7 @@ const DynamicWidthInput: React.FC<DynamicWidthInputProps> = ({ initialValue = ''
       <input
         type="text"
         ref={inputRef}
-        style={{ width: inputWidth, minWidth: minWidth, fontSize: '24px', maxWidth: '100%' }}
+        style={{ width: inputWidth, minWidth: minWidth, fontSize: '24px', maxWidth: '100%'}}
         placeholder= {defaultValue}
         value={content}
         onChange={changeHandler}
@@ -49,6 +51,28 @@ const DynamicWidthInput: React.FC<DynamicWidthInputProps> = ({ initialValue = ''
       />
     </div>
   );
+  } else if (entryType === 'tel') {
+      return (
+    <div className="wrapper" style={{ position: 'relative' }}>
+      <span
+        id="hide"
+        ref={spanRef}
+        style={{ position: 'absolute', visibility: 'hidden', whiteSpace: 'pre' }}
+      >
+        {content || ' '}
+      </span>
+      <input
+        type="text"
+        ref={inputRef}
+        style={{ width: inputWidth, minWidth: minWidth, fontSize: '24px', maxWidth: '100%'}}
+        placeholder= {defaultValue}
+        value={content}
+        onChange={changeHandler}
+        className="border-none focus:outline-none"
+      />
+    </div>
+  );
+  }
 };
 
 export default DynamicWidthInput;

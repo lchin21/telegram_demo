@@ -5,14 +5,16 @@ import { format } from "date-fns";
 import {ethers} from "ethers";
 import Modal from "./modal"
 
-function historyCard(amount: number, type: number, time: number) {
+function historyCard(amount: number, type: number, time: number, direction: number) {
     let transactionType = ""
 
     if (type === 1) {
         transactionType = "Deposit"
-    } else if (type === 3){
-        transactionType = "Transfer"
-    } else if (type === 4){
+    } else if (type === 3 && direction === 0) {
+        transactionType = "Transfer-Out"
+    } else if (type === 3 && direction === 1) {
+        transactionType = "Transfer-In"
+    }else if (type === 4){
         transactionType = "Withdraw"
     }
 
@@ -48,16 +50,19 @@ export default function History(): React.JSX.Element {
                 // @ts-ignore
                 amount: list[i].display_value,
                 date: list[i].time,
+                // @ts-ignore
+                direction: list[i].direction
             });
         }
     }
-
+    console.log(list)
     console.log(elementsList)
 
     let importantInfoList = elementsList.map(x => historyCard(
         x.amount,
         x.type,
         x.date,
+        x.direction
     ))
     console.log(importantInfoList)
 

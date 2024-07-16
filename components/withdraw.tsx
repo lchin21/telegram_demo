@@ -26,29 +26,14 @@ export default function Withdraw() {
     const handleInputChange = (value: string) => {
         setAmount(value);
     }
-    // return <div>
-    //     <p className="Text">
-    //         You can withdraw {ethers.utils.formatUnits(balanceData?.balance_available || 0, balanceData?.decimals)} USDC to withdraw area here.
-    //     </p>
-    //     <fieldset className="Fieldset">
-    //         <label className="Label" htmlFor="amount">
-    //             Amount
-    //         </label>
-    //         <input className="Input" id="amount" onChange={e => setAmount(e.target.value) } />
-    //     </fieldset>
-    //     <div
-    //         style={{ display: 'flex', marginTop: 20, justifyContent: 'flex-end' }}
-    //     >
-    //         <button className="Button green" onClick={withdraw}>Withdraw</button>
-    //     </div>
-    // </div>
+
     return(
         <Modal title="Withdraw" customButton={
             <button className="Button green flex justify-center ml-0" onClick={withdraw}>
                 Withdraw
             </button>}>
             <div className="flex items-center">
-                <DynamicWidthInput onChange={handleInputChange}></DynamicWidthInput>
+                <DynamicWidthInput onChange={handleInputChange} entryType={"tel"}></DynamicWidthInput>
                 <label htmlFor="inputField" className="ml-1 text-2xl">USDC</label>
             </div>
 

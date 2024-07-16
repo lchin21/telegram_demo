@@ -4,14 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="97bc6d90-8b17-42cc-a721-0ec847eb3939" name="Changes" comment="">
+    <list default="true" id="97bc6d90-8b17-42cc-a721-0ec847eb3939" name="Changes" comment="Added transfer">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/approvalArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/approvalArea.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/deposit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/deposit.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/dynamicEntryField.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/dynamicEntryField.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/modal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/modal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/history.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/history.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/transfer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/transfer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/withdraw.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/withdraw.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,10 +101,24 @@
       <workItem from="1720643291573" duration="333000" />
       <workItem from="1720754942515" duration="342000" />
       <workItem from="1721069486058" duration="4174000" />
+      <workItem from="1721097981344" duration="4200000" />
     </task>
+    <task id="LOCAL-00001" summary="Added transfer">
+      <option name="closed" value="true" />
+      <created>1721098143543</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1721098143543</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added transfer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added transfer" />
   </component>
 </project>

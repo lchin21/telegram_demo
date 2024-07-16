@@ -40,12 +40,12 @@ export default function Transfer() {
         </button>
     }>
         <div className="flex items-center">
-            <DynamicWidthInput onChange={handleInputChange}></DynamicWidthInput>
+            <DynamicWidthInput onChange={handleInputChange} entryType={"tel"}></DynamicWidthInput>
             <label htmlFor="inputField" className="ml-1 text-2xl">USDC</label>
         </div>
         <div className="flex items-center mt-3">
             <DynamicWidthInput onChange={handleInputKeyChange} defaultValue={"StarkKey"}
-                               minWidth={"90px"}></DynamicWidthInput>
+                               minWidth={"90px"} entryType={"text"}></DynamicWidthInput>
         </div>
 
 
