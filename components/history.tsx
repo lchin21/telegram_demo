@@ -54,8 +54,7 @@ export default function History(): React.JSX.Element {
             });
         }
     }
-    console.log(list)
-    console.log(elementsList)
+
 
     let importantInfoList = elementsList.map(x => historyCard(
         x.amount,
@@ -63,7 +62,7 @@ export default function History(): React.JSX.Element {
         x.date,
         x.from
     ))
-    console.log(importantInfoList)
+
 
 return <div>
     <h1 className="text-xl font-bold leading-none text-black mb-3">Latest Transactions</h1>
