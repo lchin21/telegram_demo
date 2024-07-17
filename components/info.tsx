@@ -1,5 +1,5 @@
 import React from "react";
-import { key } from "@/config/config";
+import { key, generateKey } from "@/config/config";
 import Modal from "@/components/modal";
 import copy from "copy-to-clipboard"
 
@@ -16,7 +16,7 @@ const handleCopyClick = async () => {
             alert("Copy to clipboard failed.");
         }
     };
-
+const keyPair = generateKey()
 export default function info() {
     return <Modal title={"Info"} >
     <button className={"bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"} onClick={handleCopyClick}>

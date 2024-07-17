@@ -4,6 +4,10 @@ import {getAccount, SendTransactionResult} from "@wagmi/core";
 import {arrayOutputType} from "zod";
 import Modal from "../components/modal"
 import {useState} from "react";
+import { ParticleNetwork } from '@particle-network/auth';
+import { ParticleProvider } from "@particle-network/provider";
+import {useEthereum} from "@particle-network/auth-core-modal";
+
 
 let reddio: Reddio;
 let key: {
@@ -21,22 +25,51 @@ const initReddio = () => {
     }
 };
 
+
+const particle = new ParticleNetwork({
+  appId: '468d50a2-a253-49c8-82b8-8647f682bed1',
+  clientKey: 'cTHMhkM3NSaoZNYWOgz1USNAxqXRRfxkrfN8NlMn',
+  projectId: 'ac297642-d52d-46dc-9437-2afafdc87edf',
+});
+
+const particleProvider = new ParticleProvider(particle.auth);
+
+
 const generateKey = async () => {
-    key = {
-        "privateKey": "17b900ade984d0886d4dfea7d4d74a08cf4aeda8589b21d1b4b7dc36e2e1045",
-        "publicKey": "0x1e6c020796cfda4a88178817361647376df8a2415404e5a7cf6784bd3b0fbb4"
+    if (!particle.auth.isLogin()) {
+    // Request user login if needed, returns current user info
+    const userInfo = await particle.auth.login();
+}
+    console.log("generateKey function called")
+
+    const account = await particle.evm.getAddress()
+    console.log(account)
+    const message = {
+
+        primaryType: 'Reddio',
+        types: {
+            EIP712Domain: [{ name: 'chainId', type: 'uint256' }],
+            Reddio: [{ name: 'contents', type: 'string' }],
+        },
+        domain: {
+            chainId: 5
+        },
+        message: {
+            contents: 'Generate layer 2 key'
+        }
     }
+
+    // @ts-ignore
+    const result = await particle.evm.signTypedDataUniq(message)
+    key = reddio.keypair.generateFromSignTypedData(result);
 }
 
-// const generateKey = async () => {
-//     key = await reddio.keypair.generateFromEthSignature();
-// }
 
 const depositUSDC = async (amount: number) => {
     const tx = await reddio.erc20.approve({
         tokenAddress: usdcContractAddress,
         amount,
-    }); 
+    });
     await tx.wait()
     // await generateKey()
     return reddio.apis.depositERC20({
@@ -76,7 +109,6 @@ const getWithdrawArea = async () => {
     return data
 }
 
-//essentially withdrawToWallet but uses chosen address
 const getTransferApproveArea = async (address: string) => {
     const { data } = await reddio.apis.withdrawalStatus({
         ethaddress: address!,
@@ -123,10 +155,6 @@ const records = async ()  => {
         throw error;
     }
 }
-
-
-
-
 
 
 

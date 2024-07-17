@@ -39,7 +39,7 @@ const TabsDemo = () => {
           {/*  smallScreen: 'avatar',*/}
           {/*  largeScreen: 'avatar',*/}
           {/*}}/>*/}
-            <ConnectButton/>
+          {/*  <ConnectButton/>*/}
         </header>
           <div className='flex justify-center mb-7 mt-0 text-5xl text-black'>
               <BalanceNumber/>
