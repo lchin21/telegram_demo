@@ -36,10 +36,14 @@ const particleProvider = new ParticleProvider(particle.auth);
 
 
 const generateKey = async () => {
-    if (!particle.auth.isLogin()) {
-    // Request user login if needed, returns current user info
-    const userInfo = await particle.auth.login();
-}
+    if (typeof window !== 'undefined') {
+        if (!particle.auth.isLogin()) {
+            // Request user login if needed, returns current user info
+            const userInfo = await particle.auth.login();
+        }
+    } else {
+        throw new Error('Window object is undefined, cannot access localStorage');
+    }
     console.log("generateKey function called")
 
     const address = await particle.evm.getAddress()
