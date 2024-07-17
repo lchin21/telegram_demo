@@ -42,8 +42,8 @@ const generateKey = async () => {
 }
     console.log("generateKey function called")
 
-    const account = await particle.evm.getAddress()
-    console.log(account)
+    const address = await particle.evm.getAddress()
+    console.log(address)
     const message = {
 
         primaryType: 'Reddio',
@@ -60,7 +60,10 @@ const generateKey = async () => {
     }
 
     // @ts-ignore
-    const result = await particle.evm.signTypedDataUniq(message)
+    // const result = await particle.evm.signTypedDataUniq(message)
+    const provider = new ParticleProvider(particle.auth);
+    const result = await provider.request({method: 'personal_sign_uniq', params: [address, message]});
+    console.log(result)
     key = reddio.keypair.generateFromSignTypedData(result);
 }
 
