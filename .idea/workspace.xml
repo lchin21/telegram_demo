@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="97bc6d90-8b17-42cc-a721-0ec847eb3939" name="Changes" comment="particle network">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/history.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/history.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/deposit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/deposit.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/particle-network/auth.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/particle-network/auth.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +30,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -99,7 +100,9 @@
       <workItem from="1720754942515" duration="342000" />
       <workItem from="1721069486058" duration="4174000" />
       <workItem from="1721097981344" duration="13402000" />
-      <workItem from="1721185638825" duration="20812000" />
+      <workItem from="1721185638825" duration="21155000" />
+      <workItem from="1721271474483" duration="1302000" />
+      <workItem from="1721272812430" duration="11626000" />
     </task>
     <task id="LOCAL-00001" summary="Added transfer">
       <option name="closed" value="true" />
@@ -157,7 +160,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721203298889</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="particle network">
+      <option name="closed" value="true" />
+      <created>1721209985571</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1721209985571</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

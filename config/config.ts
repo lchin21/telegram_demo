@@ -1,12 +1,16 @@
 import {Reddio, SignTransferParams, RecordsParams, StarkKeyParams} from "@reddio.com/js";
-import {ethers} from "ethers";
-import {getAccount, SendTransactionResult} from "@wagmi/core";
+import {ethers } from "ethers";
+import {getAccount, SendTransactionResult,} from "@wagmi/core";
 import {arrayOutputType} from "zod";
 import Modal from "../components/modal"
 import {useState} from "react";
 import { ParticleNetwork } from '@particle-network/auth';
 import { ParticleProvider } from "@particle-network/provider";
-import {useEthereum} from "@particle-network/auth-core-modal";
+import {useEthereum, useConnect} from "@particle-network/auth-core-modal";
+import { walletEntryPlugin, EntryPosition} from '@particle-network/wallet'
+import {Ethereum, EthereumSepolia} from "@particle-network/chains"; // Optional
+
+
 
 
 
@@ -35,6 +39,28 @@ const particle = new ParticleNetwork({
 });
 
 const particleProvider = new ParticleProvider(particle.auth);
+
+const ConfirmationModal = () => {
+    const { provider } = useEthereum();
+
+    const ethersProvider = new ethers.providers.Web3Provider(provider, "any");
+}
+
+// walletEntryPlugin.init({
+//     projectId: 'ac297642-d52d-46dc-9437-2afafdc87edf'!,
+//     clientKey: 'cTHMhkM3NSaoZNYWOgz1USNAxqXRRfxkrfN8NlMn',
+//     appId: '468d50a2-a253-49c8-82b8-8647f682bed1',
+//   }, {
+//     erc4337: { // Optional
+//       name: "SIMPLE", // SIMPLE, LIGHT, BICONOMY, or CYBERCONNECT
+//       version: "1.0.0"
+//     },
+//     visible: true, // Optional
+//     preload: true, // Optional
+//     entryPosition: EntryPosition.BR, // Optional
+//     topMenuType: 'close' // Optional
+//     // And so on.
+// });
 
 
 const generateKey = async () => {
@@ -68,12 +94,52 @@ const generateKey = async () => {
 }
 }
 
+
+// ERC-20 contract address and ABI (partially)
+const erc20Address = "0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8"; // Replace with actual ERC20 contract address
+const erc20Abi = [
+  "function approve(address spender, uint256 amount) public returns (bool)"
+];    // Approve function
+async function approve(amount: number, address: string) {
+  // Check if MetaMask is installed
+  if (typeof window.ethereum !== 'undefined') {
+      console.log("If statement passes")
+    try {
+      // Request user to connect their wallet
+        if (!particle.auth.isLogin()) { // Boolean based upon login state of session
+            console.log("waiting for log in")
+    // Request user login if needed, returns current user info, such as name, email, etc.
+    const userInfo = await particle.auth.login();
+}
+      const particleProvider = new ParticleProvider(particle.auth);     // Create an Ethereum provider
+      const ethersProvider = new ethers.providers.Web3Provider(particleProvider, "any");        // Get the signer (the currently connected wallet)
+      const signer = ethersProvider.getSigner();          // Create a contract instance
+      const erc20Contract = new ethers.Contract(erc20Address, erc20Abi, signer);          // Set the spender address and amount
+      const spenderAddress = address; // Replace with actual spender address
+      const amount = ethers.utils.parseUnits("10.0", 18); // Replace with actual amount          // Call the approve method
+      const tx = await erc20Contract.approve(spenderAddress, amount);
+      console.log(`Transaction hash: ${tx.hash}`);          // Wait for the transaction to be confirmed by miners
+      await tx.wait();
+      console.log("Transaction confirmed");
+    } catch (error) {
+      console.error(`Error: ${error}`);
+    }
+  } else {
+    console.log("MetaMask is not installed!");
+  }
+}
+
+
 const depositUSDC = async (amount: number) => {
-    const tx = await reddio.erc20.approve({
-        tokenAddress: usdcContractAddress,
-        amount,
-    });
-    await tx.wait()
+    // @ts-ignore
+    // const tx = await reddio.erc20.approve({
+    //     tokenAddress: usdcContractAddress,
+    //     amount,
+    // });
+    console.log("test1")
+    const address = await particle.evm.getAddress()
+    await approve(amount, address!)
+    // await tx.wait()
     // await generateKey()
     return reddio.apis.depositERC20({
         starkKey: key.publicKey,

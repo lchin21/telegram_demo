@@ -39,10 +39,24 @@ export default function App({ Component, pageProps }: AppProps) {
 
     return (
         <AuthCoreContextProvider options={{
-            projectId:"ac297642-d52d-46dc-9437-2afafdc87edf",
-            clientKey: "cTHMhkM3NSaoZNYWOgz1USNAxqXRRfxkrfN8NlMn",
-            appId: "468d50a2-a253-49c8-82b8-8647f682bed1"
-        }}
+        projectId: "ac297642-d52d-46dc-9437-2afafdc87edf",
+        clientKey: "cTHMhkM3NSaoZNYWOgz1USNAxqXRRfxkrfN8NlMn",
+        appId: "468d50a2-a253-49c8-82b8-8647f682bed1",
+        authTypes: [AuthType.email, AuthType.google, AuthType.twitter],
+        themeType: 'dark',
+        fiatCoin: 'USD',
+        language: 'en',
+        erc4337: {
+          name: 'SIMPLE',
+          version: '1.0.0',
+        },
+        wallet: {
+          visible: true,
+          customStyle: {
+            supportChains: [EthereumSepolia],
+          }
+        },
+      }}
      >
             <Component {...pageProps} />
         </AuthCoreContextProvider>

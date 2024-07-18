@@ -7,6 +7,7 @@ export default function Deposit() {
     const deposit = useCallback(
         async (type: any) => {
             try {
+                console.log("test2")
                 await depositUSDC(Number(amount))
             } catch (e) {
                 console.log(e);
