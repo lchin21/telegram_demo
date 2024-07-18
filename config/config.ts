@@ -4,7 +4,7 @@ import {getAccount, SendTransactionResult,} from "@wagmi/core";
 import {arrayOutputType} from "zod";
 import Modal from "../components/modal"
 import {useState} from "react";
-import { ParticleNetwork } from '@particle-network/auth';
+import {ParticleNetwork, WalletEntryPosition} from '@particle-network/auth';
 import { ParticleProvider } from "@particle-network/provider";
 import {useEthereum, useConnect} from "@particle-network/auth-core-modal";
 import { walletEntryPlugin, EntryPosition} from '@particle-network/wallet'
@@ -33,9 +33,26 @@ const initReddio = () => {
 
 
 const particle = new ParticleNetwork({
-  appId: '468d50a2-a253-49c8-82b8-8647f682bed1',
-  clientKey: 'cTHMhkM3NSaoZNYWOgz1USNAxqXRRfxkrfN8NlMn',
-  projectId: 'ac297642-d52d-46dc-9437-2afafdc87edf',
+  projectId: "ac297642-d52d-46dc-9437-2afafdc87edf",
+  clientKey: "cTHMhkM3NSaoZNYWOgz1USNAxqXRRfxkrfN8NlMn",
+  appId: "468d50a2-a253-49c8-82b8-8647f682bed1",
+  chainName: "ethereum", // Optional: resolves to 'ethereum' both in this case & by default
+  chainId: 11155111, // Optional: resolves to 1 both in this case & by default
+  wallet: {   // Optional: object controlling additional configurations
+    displayWalletEntry: true,  // Whether or not the wallet popup is shown on-screen after login
+    defaultWalletEntryPosition: WalletEntryPosition.BR, // If the former is true, the position in which the popup appears
+    uiMode: "dark",  // Light or dark, if left blank, aligns with web auth default
+    supportChains: [{ id: 11155111, name: "ethereum"}], // Restricts the chains available within the web wallet interface
+    customStyle: {}, // If applicable, custom wallet style in JSON
+  },
+  securityAccount: { // Optional: Configuration of security requirements upon login
+    // If, and in what frequency, will the user be prompted to set a payment password
+    // 0: None, 1: Once (default), 2: Always
+    promptSettingWhenSign: 1,
+    // If, and in what frequency, will the user be prompted to set a master password
+    // 0: None (default), 1: Once, 2: Always
+    promptMasterPasswordSettingWhenLogin: 1
+  },
 });
 
 const particleProvider = new ParticleProvider(particle.auth);
@@ -100,7 +117,7 @@ const erc20Address = "0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8"; // Replace wi
 const erc20Abi = [
   "function approve(address spender, uint256 amount) public returns (bool)"
 ];    // Approve function
-async function approve(amount: number, address: string) {
+async function approve(amount: string, address: string) {
   // Check if MetaMask is installed
   if (typeof window.ethereum !== 'undefined') {
       console.log("If statement passes")
@@ -111,14 +128,22 @@ async function approve(amount: number, address: string) {
     // Request user login if needed, returns current user info, such as name, email, etc.
     const userInfo = await particle.auth.login();
 }
-      const particleProvider = new ParticleProvider(particle.auth);     // Create an Ethereum provider
-      const ethersProvider = new ethers.providers.Web3Provider(particleProvider, "any");        // Get the signer (the currently connected wallet)
-      const signer = ethersProvider.getSigner();          // Create a contract instance
-      const erc20Contract = new ethers.Contract(erc20Address, erc20Abi, signer);          // Set the spender address and amount
-      const spenderAddress = address; // Replace with actual spender address
-      const amount = ethers.utils.parseUnits("10.0", 18); // Replace with actual amount          // Call the approve method
+      const particleProvider = new ParticleProvider(particle.auth);
+        // Create an Ethereum provider
+      const ethersProvider = new ethers.providers.Web3Provider(particleProvider, "any");
+      // Get the signer (the currently connected wallet)
+      const signer = ethersProvider.getSigner();
+      // Create a contract instance
+      const erc20Contract = new ethers.Contract(erc20Address, erc20Abi, signer);
+      // Set the spender address and amount
+      const spenderAddress = "0x6D8909135Ce972189306347B1279252a96E72615";
+      // Replace with actual spender address
+      const amount = ethers.utils.parseUnits("10.0", 18);
+      // Replace with actual amount
+        // Call the approve method
       const tx = await erc20Contract.approve(spenderAddress, amount);
-      console.log(`Transaction hash: ${tx.hash}`);          // Wait for the transaction to be confirmed by miners
+      console.log(`Transaction hash: ${tx.hash}`);
+      // Wait for the transaction to be confirmed by miners
       await tx.wait();
       console.log("Transaction confirmed");
     } catch (error) {
@@ -138,7 +163,7 @@ const depositUSDC = async (amount: number) => {
     // });
     console.log("test1")
     const address = await particle.evm.getAddress()
-    await approve(amount, address!)
+    const tx = await approve(String(amount), address!)
     // await tx.wait()
     // await generateKey()
     return reddio.apis.depositERC20({
