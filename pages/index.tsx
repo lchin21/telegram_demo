@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 // import {ConnectButton} from "@particle-network/connectkit";
 import * as Tabs from '@radix-ui/react-tabs'
 import * as Dialog from '@radix-ui/react-dialog';
@@ -18,16 +18,24 @@ import Info from "@/components/info";
 let isInit = false
 
 const TabsDemo = () => {
+    const [signature, setSignature] = useState(null);
   useEffect(() => {
     initReddio()
     watchAccount(async (account) => {
       if (account.address && !isInit) {
         isInit = true
         await generateKey()
+          // setSignature(localStorage.getItem("signature")!)
       }
     });
   }, []);
 
+
+
+//
+// useEffect(() => {
+//     localStorage.setItem("signature", signature.toString())
+// }, [signature]);
 
   return (
       <main className='h-screen bg-gray-100'>
@@ -53,6 +61,7 @@ const TabsDemo = () => {
             <Transfer/>
             <Modal title="History"><History/></Modal>
             <Info/>
+            <b>Version 1</b>
         </div>
       </main>
   )

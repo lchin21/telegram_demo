@@ -23,6 +23,7 @@ import {erc20Approve} from "@/components/erc20Approval";
 import {  }  from "@particle-network/connectkit"
 import {  } from "@particle-network/aa"
 import  EvmService from "@particle-network/auth/lib/types/service/evmService";
+import {localStorage} from "@aws-sdk/credential-provider-cognito-identity/dist-types/localStorage";
 
 
 
@@ -44,7 +45,7 @@ const initReddio = () => {
 
 
 
-const particle = new ParticleNetwork({
+export const particle = new ParticleNetwork({
   projectId: "ac297642-d52d-46dc-9437-2afafdc87edf",
   clientKey: "cTHMhkM3NSaoZNYWOgz1USNAxqXRRfxkrfN8NlMn",
   appId: "468d50a2-a253-49c8-82b8-8647f682bed1",
@@ -93,8 +94,9 @@ const ConfirmationModal = () => {
 
 
 const generateKey = async () => {
+    // window.localStorage.removeItem("signature")
     if (typeof window !== "undefined" && window.localStorage) {
-    if (localStorage.getItem("signature") === null) {
+    if (window.localStorage.getItem("signature") === null) {
     if (!particle.auth.isLogin()) {
     // Request user login if needed, returns current user info
     const userInfo = await particle.auth.login();
@@ -120,11 +122,15 @@ const generateKey = async () => {
     // const result = await particle.evm.signTypedDataUniq(message)
     const provider = new ParticleProvider(particle.auth);
     const result = await provider.request({method: 'personal_sign_uniq', params: [address, message]});
-    localStorage.setItem("signature", result)
+    window.localStorage.setItem("signature", result)
+        console.log(result)
+        console.log(window.localStorage.getItem("signature"));
     key = reddio.keypair.generateFromSignTypedData(result);}
     else {
-        initReddio()
-        key = reddio.keypair.generateFromSignTypedData(localStorage.getItem("signature")!);
+        key = reddio.keypair.generateFromSignTypedData(window.localStorage.getItem("signature")!)
+
+        // @ts-ignore
+        console.log("else failed");
     }
 }
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { key, generateKey } from "@/config/config";
+import {key, generateKey, initReddio} from "@/config/config";
 import Modal from "@/components/modal";
 import copy from "copy-to-clipboard"
 
@@ -16,6 +16,7 @@ const handleCopyClick = async () => {
             alert("Copy to clipboard failed.");
         }
     };
+initReddio()
 const keyPair = generateKey()
 export default function info() {
     return <Modal title={"Info"} >

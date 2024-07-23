@@ -5,17 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97bc6d90-8b17-42cc-a721-0ec847eb3939" name="Changes" comment="particle network">
-      <change afterPath="$PROJECT_DIR$/components/erc20Approval.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/erc20Deposit.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/abi.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/deposit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/deposit.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/info.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/info.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +107,7 @@
       <workItem from="1721358280123" duration="16538000" />
       <workItem from="1721382065484" duration="2113000" />
       <workItem from="1721616766467" duration="7733000" />
-      <workItem from="1721706156815" duration="3525000" />
+      <workItem from="1721706156815" duration="11068000" />
     </task>
     <task id="LOCAL-00001" summary="Added transfer">
       <option name="closed" value="true" />
@@ -195,7 +189,23 @@
       <option name="project" value="LOCAL" />
       <updated>1721291062559</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="particle network">
+      <option name="closed" value="true" />
+      <created>1721710437232</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1721710437232</updated>
+    </task>
+    <task id="LOCAL-00012" summary="particle network">
+      <option name="closed" value="true" />
+      <created>1721710649076</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1721710649076</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
