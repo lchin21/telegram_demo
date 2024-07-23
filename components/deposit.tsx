@@ -8,7 +8,7 @@ export default function Deposit() {
         async (type: any) => {
             try {
                 console.log("test2")
-                await depositUSDC(Number(amount))
+                await depositUSDC(amount)
             } catch (e) {
                 console.log(e);
             }

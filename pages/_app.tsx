@@ -1,37 +1,35 @@
 import '@/styles/globals.css'
 import './style/styles.css';
-import '@rainbow-me/rainbowkit/styles.css';
 import type { AppProps } from 'next/app'
-import {configureChains, sepolia} from "@wagmi/core";
-import {getDefaultWallets, RainbowKitProvider} from "@rainbow-me/rainbowkit";
-import {createClient, WagmiConfig} from "wagmi";
-import { publicProvider } from 'wagmi/providers/public'
+import {configureChains, sepolia, InjectedConnector, createClient, connect,} from "@wagmi/core";
 import {ModalProvider} from "@particle-network/connectkit";
 import {EthereumSepolia} from "@particle-network/chains";
 import '@particle-network/connectkit/dist/index.css';
 import { evmWallets, solanaWallets } from '@particle-network/connectors';
 import { AuthCoreContextProvider, PromptSettingType } from '@particle-network/auth-core-modal';
 import {AuthType} from "@particle-network/auth-core";
+import { publicProvider } from '@wagmi/core/providers/public'
+import { createConfig } from 'wagmi'
 
-
-const { chains, provider } = configureChains(
-    [sepolia],
-    [
-      publicProvider()
-    ],
-);
-
-const { connectors } = getDefaultWallets({
-  appName: 'My RainbowKit App',
-  projectId: '6756806cba2601750f89e7fd325c28f1',
-  chains
-});
-
-const wagmiConfig = createClient({
+// Wagmi/core config
+const { chains, provider, webSocketProvider } = configureChains(
+  [sepolia],
+  [publicProvider()],
+)
+const config = createClient({
   autoConnect: true,
-  connectors,
   provider,
-});
+  webSocketProvider,
+})
+
+// const connector = new InjectedConnector({
+//     chains: [sepolia]
+// })
+//
+// const { account } = await connect({
+//   connector: connector,
+// })
+
 
 export default function App({ Component, pageProps }: AppProps) {
 
@@ -60,6 +58,7 @@ export default function App({ Component, pageProps }: AppProps) {
      >
             <Component {...pageProps} />
         </AuthCoreContextProvider>
+
     )
 
 

@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react'
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 // import {ConnectButton} from "@particle-network/connectkit";
 import * as Tabs from '@radix-ui/react-tabs'
 import * as Dialog from '@radix-ui/react-dialog';

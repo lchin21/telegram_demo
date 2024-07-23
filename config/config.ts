@@ -1,17 +1,28 @@
 import {Reddio, SignTransferParams, RecordsParams, StarkKeyParams} from "@reddio.com/js";
-import {ethers } from "ethers";
-import {getAccount, SendTransactionResult,} from "@wagmi/core";
+import {BigNumber, ethers} from "ethers";
+import {
+    getAccount,
+    InjectedConnector,
+    prepareWriteContract,
+    readContract,
+    SendTransactionResult, sepolia,
+    writeContract,
+    connect,
+
+} from "@wagmi/core";
 import {arrayOutputType} from "zod";
 import Modal from "../components/modal"
 import {useState} from "react";
-import {ParticleNetwork, WalletEntryPosition} from '@particle-network/auth';
-import { ParticleProvider } from "@particle-network/provider";
-import {useEthereum, useConnect} from "@particle-network/auth-core-modal";
-import { walletEntryPlugin, EntryPosition} from '@particle-network/wallet'
+import {ParticleNetwork, WalletEntryPosition, EVMProvider} from '@particle-network/auth';
+import { ParticleProvider, } from "@particle-network/provider";
+import {useEthereum, useConnect,} from "@particle-network/auth-core-modal";
+import { walletEntryPlugin, EntryPosition, } from '@particle-network/wallet'
 import {Ethereum, EthereumSepolia} from "@particle-network/chains"; // Optional
-
-
-
+import abi from "./abi.json"
+import {erc20Approve} from "@/components/erc20Approval";
+import {  }  from "@particle-network/connectkit"
+import {  } from "@particle-network/aa"
+import  EvmService from "@particle-network/auth/lib/types/service/evmService";
 
 
 
@@ -30,6 +41,7 @@ const initReddio = () => {
         });
     }
 };
+
 
 
 const particle = new ParticleNetwork({
@@ -82,6 +94,7 @@ const ConfirmationModal = () => {
 
 const generateKey = async () => {
     if (typeof window !== "undefined" && window.localStorage) {
+    if (localStorage.getItem("signature") === null) {
     if (!particle.auth.isLogin()) {
     // Request user login if needed, returns current user info
     const userInfo = await particle.auth.login();
@@ -107,16 +120,21 @@ const generateKey = async () => {
     // const result = await particle.evm.signTypedDataUniq(message)
     const provider = new ParticleProvider(particle.auth);
     const result = await provider.request({method: 'personal_sign_uniq', params: [address, message]});
-    key = reddio.keypair.generateFromSignTypedData(result);
+    localStorage.setItem("signature", result)
+    key = reddio.keypair.generateFromSignTypedData(result);}
+    else {
+        initReddio()
+        key = reddio.keypair.generateFromSignTypedData(localStorage.getItem("signature")!);
+    }
 }
 }
 
 
-// ERC-20 contract address and ABI (partially)
+
 const erc20Address = "0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8"; // Replace with actual ERC20 contract address
 const erc20Abi = [
   "function approve(address spender, uint256 amount) public returns (bool)"
-];    // Approve function
+];
 async function approve(amount: string, address: string) {
   // Check if MetaMask is installed
   if (typeof window.ethereum !== 'undefined') {
@@ -155,15 +173,16 @@ async function approve(amount: string, address: string) {
 }
 
 
-const depositUSDC = async (amount: number) => {
+const depositUSDC = async (value: string) => {
+    let amount = value.toString()
     // @ts-ignore
-    // const tx = await reddio.erc20.approve({
-    //     tokenAddress: usdcContractAddress,
-    //     amount,
-    // });
+    const tx = await reddio.erc20.approve({
+        tokenAddress: usdcContractAddress,
+        amount,
+    });
     console.log("test1")
     const address = await particle.evm.getAddress()
-    const tx = await approve(String(amount), address!)
+    // const tx = await approve(String(amount), address!)
     // await tx.wait()
     // await generateKey()
     return reddio.apis.depositERC20({
@@ -171,7 +190,6 @@ const depositUSDC = async (amount: number) => {
         quantizedAmount: amount,
         tokenAddress: usdcContractAddress,
     });
-
 }
 
 
