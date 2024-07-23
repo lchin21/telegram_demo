@@ -1,93 +1,93 @@
-import { ethers } from 'ethers';
-import { AxiosInstance } from 'axios';
-import {
-  prepareWriteContract,
-  writeContract,
-} from '@wagmi/core';
-import type { WriteContractResult } from '@wagmi/core';
+// import { ethers } from 'ethers';
+// import { AxiosInstance } from 'axios';
 // import {
-//   DepositParams,
-//   DepositERC20Params,
-// } from '../types';
-import abi from '../abi/Deposits.json';
-import { getAssetTypeAndId } from '../utils/asset';
-import { getVaultID } from './vault';
-
-export interface DepositParams {
-  starkKey: string;
-  quantizedAmount: number | string;
-}
-
-export interface DepositERC20Params {
-  starkKey: string;
-  quantizedAmount: number | string;
-  tokenAddress: string;
-}
-
-export const depositERC20 = async (
-  request: AxiosInstance,
-  contractAddress: string,
-  params: DepositERC20Params,
-): Promise<WriteContractResult> => {
-  const { starkKey, quantizedAmount, tokenAddress } = params;
-  const { assetId, assetType } = await getAssetTypeAndId(request, {
-    type: 'ERC20',
-    tokenAddress,
-  });
-  const { data } = await getVaultID(request, {
-    starkKeys: starkKey,
-    assetId,
-  });
-
-  const config = await prepareWriteContract({
-    address: contractAddress as `0x${string}`,
-    abi,
-    functionName: 'depositERC20',
-    args: [
-      starkKey,
-      assetType,
-      data.data.vault_ids[0],
-      ethers.utils.parseUnits(quantizedAmount.toString(), 6),
-    ],
-  });
-  return writeContract(config);
-};
-
-export const depositETH = async (
-  request: AxiosInstance,
-  contractAddress: string,
-  params: DepositParams,
-): Promise<WriteContractResult> => {
-  const { starkKey, quantizedAmount } = params;
-  const { assetType, assetId } = await getAssetTypeAndId(request, {
-    type: 'ETH',
-  });
-  const { data } = await getVaultID(request, {
-    starkKeys: starkKey,
-    assetId,
-  });
-
-  const config = await prepareWriteContract({
-    address: contractAddress as `0x${string}`,
-    abi,
-    functionName: 'depositEth',
-    args: [starkKey, assetType, data.data.vault_ids[0]],
-    overrides: {
-      value: ethers.utils.parseEther(quantizedAmount.toString()),
-    },
-  });
-  return writeContract(config);
-};
-
-
-  const config = await prepareWriteContract({
-    address: contractAddress as `0x${string}`,
-    abi,
-    functionName: 'depositNft',
-    args: [starkKey,
-      assetType,
-      data.data.vault_ids[0],
-      tokenId],
-  });
-  return writeContract(config);
-};
+//   prepareWriteContract,
+//   writeContract,
+// } from '@wagmi/core';
+// import type { WriteContractResult } from '@wagmi/core';
+// // import {
+// //   DepositParams,
+// //   DepositERC20Params,
+// // } from '../types';
+// // import abi from '../abi/Deposits.json';
+// // import { getAssetTypeAndId } from '../utils/asset';
+// // import { getVaultID } from './vault';
+//
+// export interface DepositParams {
+//   starkKey: string;
+//   quantizedAmount: number | string;
+// }
+//
+// export interface DepositERC20Params {
+//   starkKey: string;
+//   quantizedAmount: number | string;
+//   tokenAddress: string;
+// }
+//
+// export const depositERC20 = async (
+//   request: AxiosInstance,
+//   contractAddress: string,
+//   params: DepositERC20Params,
+// ): Promise<WriteContractResult> => {
+//   const { starkKey, quantizedAmount, tokenAddress } = params;
+//   const { assetId, assetType } = await getAssetTypeAndId(request, {
+//     type: 'ERC20',
+//     tokenAddress,
+//   });
+//   const { data } = await getVaultID(request, {
+//     starkKeys: starkKey,
+//     assetId,
+//   });
+//
+//   const config = await prepareWriteContract({
+//     address: contractAddress as `0x${string}`,
+//     abi,
+//     functionName: 'depositERC20',
+//     args: [
+//       starkKey,
+//       assetType,
+//       data.data.vault_ids[0],
+//       ethers.utils.parseUnits(quantizedAmount.toString(), 6),
+//     ],
+//   });
+//   return writeContract(config);
+// };
+//
+// export const depositETH = async (
+//   request: AxiosInstance,
+//   contractAddress: string,
+//   params: DepositParams,
+// ): Promise<WriteContractResult> => {
+//   const { starkKey, quantizedAmount } = params;
+//   const { assetType, assetId } = await getAssetTypeAndId(request, {
+//     type: 'ETH',
+//   });
+//   const { data } = await getVaultID(request, {
+//     starkKeys: starkKey,
+//     assetId,
+//   });
+//
+//   const config = await prepareWriteContract({
+//     address: contractAddress as `0x${string}`,
+//     abi,
+//     functionName: 'depositEth',
+//     args: [starkKey, assetType, data.data.vault_ids[0]],
+//     overrides: {
+//       value: ethers.utils.parseEther(quantizedAmount.toString()),
+//     },
+//   });
+//   return writeContract(config);
+// };
+//
+//
+//   // const config = await prepareWriteContract({
+//   //   address: contractAddress as `0x${string}`,
+//   //   abi,
+//   //   functionName: 'depositNft',
+//   //   args: [starkKey,
+//   //     assetType,
+//   //     data.data.vault_ids[0],
+//   //     tokenId],
+//   // });
+// //   return writeContract(config);
+// // };
