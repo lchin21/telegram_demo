@@ -14,8 +14,11 @@ export default function Withdraw() {
         async (type: any) => {
             try {
                 await withdrawUSDC(Number(amount))
-            } catch (e) {
-                console.log(e);
+                console.log('withdraw function called')
+            } catch (error) {
+                console.log('withdraw not called');
+                // console.log(error);
+
             }
         },
         [amount],

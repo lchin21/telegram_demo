@@ -10,28 +10,38 @@ import {
     connect,
 
 } from "@wagmi/core";
+// @ts-ignore
+import WebApp from '@twa-dev/sdk';
 import {arrayOutputType} from "zod";
 import Modal from "../components/modal"
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {ParticleNetwork, WalletEntryPosition, EVMProvider} from '@particle-network/auth';
 import { ParticleProvider, } from "@particle-network/provider";
 import {useEthereum, useConnect,} from "@particle-network/auth-core-modal";
 import { walletEntryPlugin, EntryPosition, } from '@particle-network/wallet'
 import {Ethereum, EthereumSepolia} from "@particle-network/chains"; // Optional
-import abi from "./abi.json"
+import abi from "./DepositFunctionality/Deposit.abi.json"
 import {erc20Approve} from "@/components/erc20Approval";
-import {  }  from "@particle-network/connectkit"
+import { useParticleProvider }  from "@particle-network/connectkit"
 import {  } from "@particle-network/aa"
 import  EvmService from "@particle-network/auth/lib/types/service/evmService";
-import {localStorage} from "@aws-sdk/credential-provider-cognito-identity/dist-types/localStorage";
+import {depositERC20} from "./DepositFunctionality/depositErc20";
+// import {Telegram} from "telegraf";
+import axios, { AxiosInstance } from 'axios';
+import {Web3Provider} from "@ethersproject/providers";
+import {Types, Asset} from './DepositFunctionality/types'
+import {withdrawalFromL2} from "@/config/WithdrawFunctionality/withdrawFromLayer2";
 
-
-
+console.log('tteessstt')
 let reddio: Reddio;
 let key: {
     privateKey: string;
     publicKey: string;
 };
+
+const request = axios.create({
+    baseURL: 'https://api-dev.reddio.com',
+  });
 
 const usdcContractAddress =  '0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8'
 
@@ -43,6 +53,7 @@ const initReddio = () => {
     }
 };
 
+export {reddio};
 
 
 export const particle = new ParticleNetwork({
@@ -68,147 +79,105 @@ export const particle = new ParticleNetwork({
   },
 });
 
-const particleProvider = new ParticleProvider(particle.auth);
+export const particleProvider = new ParticleProvider(particle.auth);
 
-const ConfirmationModal = () => {
+export const ConfirmationModal = () => {
     const { provider } = useEthereum();
 
     const ethersProvider = new ethers.providers.Web3Provider(provider, "any");
 }
 
-// walletEntryPlugin.init({
-//     projectId: 'ac297642-d52d-46dc-9437-2afafdc87edf'!,
-//     clientKey: 'cTHMhkM3NSaoZNYWOgz1USNAxqXRRfxkrfN8NlMn',
-//     appId: '468d50a2-a253-49c8-82b8-8647f682bed1',
-//   }, {
-//     erc4337: { // Optional
-//       name: "SIMPLE", // SIMPLE, LIGHT, BICONOMY, or CYBERCONNECT
-//       version: "1.0.0"
-//     },
-//     visible: true, // Optional
-//     preload: true, // Optional
-//     entryPosition: EntryPosition.BR, // Optional
-//     topMenuType: 'close' // Optional
-//     // And so on.
-// });
-
 
 const generateKey = async () => {
     // window.localStorage.removeItem("signature")
     if (typeof window !== "undefined" && window.localStorage) {
-    if (window.localStorage.getItem("signature") === null) {
-    if (!particle.auth.isLogin()) {
-    // Request user login if needed, returns current user info
-    const userInfo = await particle.auth.login();
-}
+        if (window.localStorage.getItem("signature") === null) {
+            if (!particle.auth.isLogin()) {
+                // Request user login if needed, returns current user info
+                const userInfo = await particle.auth.login();
+            }
 
-    const address = await particle.evm.getAddress()
-    const message = {
+            const address = await particle.evm.getAddress()
+            const message = {
 
-        primaryType: 'Reddio',
-        types: {
-            EIP712Domain: [{ name: 'chainId', type: 'uint256' }],
-            Reddio: [{ name: 'contents', type: 'string' }],
-        },
-        domain: {
-            chainId: 5
-        },
-        message: {
-            contents: 'Generate layer 2 key'
+                primaryType: 'Reddio',
+                types: {
+                    EIP712Domain: [{name: 'chainId', type: 'uint256'}],
+                    Reddio: [{name: 'contents', type: 'string'}],
+                },
+                domain: {
+                    chainId: 5
+                },
+                message: {
+                    contents: 'Generate layer 2 key'
+                }
+            }
+
+
+            const provider = new ParticleProvider(particle.auth);
+            const result = await provider.request({method: 'personal_sign_uniq', params: [address, message]});
+            console.log("cloud storage:")
+            window.localStorage.setItem("signature", result)
+            console.log(result)
+            console.log(window.localStorage.getItem("signature"));
+            key = reddio.keypair.generateFromSignTypedData(result);
+        } else {
+            key = reddio.keypair.generateFromSignTypedData(window.localStorage.getItem("signature")!)
+            console.log("signature")
+            console.log(key)
         }
     }
-
-    // @ts-ignore
-    // const result = await particle.evm.signTypedDataUniq(message)
-    const provider = new ParticleProvider(particle.auth);
-    const result = await provider.request({method: 'personal_sign_uniq', params: [address, message]});
-    window.localStorage.setItem("signature", result)
-        console.log(result)
-        console.log(window.localStorage.getItem("signature"));
-    key = reddio.keypair.generateFromSignTypedData(result);}
-    else {
-        key = reddio.keypair.generateFromSignTypedData(window.localStorage.getItem("signature")!)
-
-        // @ts-ignore
-        console.log("else failed");
-    }
-}
 }
 
 
 
 const erc20Address = "0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8"; // Replace with actual ERC20 contract address
-const erc20Abi = [
-  "function approve(address spender, uint256 amount) public returns (bool)"
-];
-async function approve(amount: string, address: string) {
-  // Check if MetaMask is installed
-  if (typeof window.ethereum !== 'undefined') {
-      console.log("If statement passes")
-    try {
-      // Request user to connect their wallet
-        if (!particle.auth.isLogin()) { // Boolean based upon login state of session
-            console.log("waiting for log in")
-    // Request user login if needed, returns current user info, such as name, email, etc.
-    const userInfo = await particle.auth.login();
-}
-      const particleProvider = new ParticleProvider(particle.auth);
-        // Create an Ethereum provider
-      const ethersProvider = new ethers.providers.Web3Provider(particleProvider, "any");
-      // Get the signer (the currently connected wallet)
-      const signer = ethersProvider.getSigner();
-      // Create a contract instance
-      const erc20Contract = new ethers.Contract(erc20Address, erc20Abi, signer);
-      // Set the spender address and amount
-      const spenderAddress = "0x6D8909135Ce972189306347B1279252a96E72615";
-      // Replace with actual spender address
-      const amount = ethers.utils.parseUnits("10.0", 18);
-      // Replace with actual amount
-        // Call the approve method
-      const tx = await erc20Contract.approve(spenderAddress, amount);
-      console.log(`Transaction hash: ${tx.hash}`);
-      // Wait for the transaction to be confirmed by miners
-      await tx.wait();
-      console.log("Transaction confirmed");
-    } catch (error) {
-      console.error(`Error: ${error}`);
+
+
+const depositUSDC = async (amount: number) => {
+    const address = await particle.evm.getAddress();
+    if (!address) {
+        throw new Error("Failed to retrieve the address.");
     }
-  } else {
-    console.log("MetaMask is not installed!");
-  }
-}
+    console.log(`User address: ${address}`);
 
+    const assetDict: Asset = {
+        type: Types.ERC20,
+        tokenAddress: usdcContractAddress,
 
-const depositUSDC = async (value: string) => {
-    let amount = value.toString()
-    // @ts-ignore
-    const tx = await reddio.erc20.approve({
-        tokenAddress: usdcContractAddress,
-        amount,
-    });
-    console.log("test1")
-    const address = await particle.evm.getAddress()
-    // const tx = await approve(String(amount), address!)
-    // await tx.wait()
-    // await generateKey()
-    return reddio.apis.depositERC20({
-        starkKey: key.publicKey,
-        quantizedAmount: amount,
-        tokenAddress: usdcContractAddress,
-    });
-}
+    };
+
+    const result = await depositERC20(
+        request,
+        usdcContractAddress,
+        {
+          starkKey: key.publicKey,
+          quantizedAmount: amount
+        },
+        particle,
+        assetDict
+      );
+
+    console.log(`Deposit result: ${JSON.stringify(result)}`);
+    return result;
+};
 
 
 const withdrawUSDC = async (amount: number) => {
+
     const params: SignTransferParams = {
         starkKey: key.publicKey,
         privateKey: key.privateKey,
         amount,
-        receiver: getAccount().address!,
+        receiver: '0x6D8909135Ce972189306347B1279252a96E72615',
         type: 'ERC20',
         contractAddress: usdcContractAddress,
     };
-    return reddio.apis.withdrawalFromL2(params)
+
+    return withdrawalFromL2(
+        request,
+        params
+    );
 }
 
 const getBalance = async () => {

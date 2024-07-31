@@ -1,15 +1,17 @@
 import '@/styles/globals.css'
 import './style/styles.css';
 import type { AppProps } from 'next/app'
-import {configureChains, sepolia, InjectedConnector, createClient, connect,} from "@wagmi/core";
-import {ModalProvider} from "@particle-network/connectkit";
+import {configureChains, sepolia, InjectedConnector, createClient, connect,} from "@wagmi/core";import {ModalProvider, useParticleProvider} from "@particle-network/connectkit";
 import {EthereumSepolia} from "@particle-network/chains";
 import '@particle-network/connectkit/dist/index.css';
 import { evmWallets, solanaWallets } from '@particle-network/connectors';
-import { AuthCoreContextProvider, PromptSettingType } from '@particle-network/auth-core-modal';
+import {AuthCoreContextProvider, PromptSettingType, useEthereum} from '@particle-network/auth-core-modal';
 import {AuthType} from "@particle-network/auth-core";
 import { publicProvider } from '@wagmi/core/providers/public'
 import { createConfig } from 'wagmi'
+import ScriptLoader from "../components/scriptLoader"
+import {ethers} from "ethers";
+
 
 // Wagmi/core config
 const { chains, provider, webSocketProvider } = configureChains(
@@ -21,7 +23,6 @@ const config = createClient({
   provider,
   webSocketProvider,
 })
-
 // const connector = new InjectedConnector({
 //     chains: [sepolia]
 // })
@@ -30,9 +31,7 @@ const config = createClient({
 //   connector: connector,
 // })
 
-
 export default function App({ Component, pageProps }: AppProps) {
-
 
 
     return (
@@ -40,7 +39,7 @@ export default function App({ Component, pageProps }: AppProps) {
         projectId: "ac297642-d52d-46dc-9437-2afafdc87edf",
         clientKey: "cTHMhkM3NSaoZNYWOgz1USNAxqXRRfxkrfN8NlMn",
         appId: "468d50a2-a253-49c8-82b8-8647f682bed1",
-        authTypes: [AuthType.email, AuthType.google, AuthType.twitter],
+        authTypes: [AuthType.email],
         themeType: 'dark',
         fiatCoin: 'USD',
         language: 'en',
@@ -56,11 +55,12 @@ export default function App({ Component, pageProps }: AppProps) {
         },
       }}
      >
+        <ScriptLoader src={"https://telegram.org/js/telegram-web-app.js"}></ScriptLoader>
+
             <Component {...pageProps} />
         </AuthCoreContextProvider>
 
     )
-
 
 
 

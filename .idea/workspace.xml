@@ -5,10 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97bc6d90-8b17-42cc-a721-0ec847eb3939" name="Changes" comment="particle network">
+      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/logOut.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/scriptLoader.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/asset.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/assetId.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/contractInfo.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/newDeposit.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/pareParams.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/types.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/vault.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/webApp.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/usdc-demo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/usdc-demo.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/deposit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/deposit.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bot/bot.js" beforeDir="false" afterPath="$PROJECT_DIR$/Bot/bot.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/info.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/info.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/abi.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/abi.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_document.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_document.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -19,6 +36,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="HTML File" />
         <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
       </list>
@@ -56,7 +74,9 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -107,7 +127,12 @@
       <workItem from="1721358280123" duration="16538000" />
       <workItem from="1721382065484" duration="2113000" />
       <workItem from="1721616766467" duration="7733000" />
-      <workItem from="1721706156815" duration="11068000" />
+      <workItem from="1721706156815" duration="12224000" />
+      <workItem from="1721799476571" duration="1744000" />
+      <workItem from="1721878752228" duration="8062000" />
+      <workItem from="1721966906704" duration="8489000" />
+      <workItem from="1722219050155" duration="8883000" />
+      <workItem from="1722228982734" duration="10798000" />
     </task>
     <task id="LOCAL-00001" summary="Added transfer">
       <option name="closed" value="true" />
@@ -205,7 +230,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721710649076</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="particle network">
+      <option name="closed" value="true" />
+      <created>1721723617443</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1721723617443</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
