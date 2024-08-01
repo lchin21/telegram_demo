@@ -1,3 +1,4 @@
+// @ts-ignore
 import { asset } from '@starkware-industries/starkware-crypto-utils';
 import { AxiosInstance } from 'axios';
 import assert from 'assert';

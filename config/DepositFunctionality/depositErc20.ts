@@ -2,9 +2,8 @@ import {ethers, BigNumber} from "ethers";
 import {ParticleProvider} from "@particle-network/provider";
 // Optional
 import axios, {AxiosInstance} from 'axios';
-import assert from "assert";
 // @ts-ignore
-import abiJson from './Deposit.abi.json';
+import abiJson from ' ';
 import {Types, Asset, Response, ContractInfoParams, ContractInfoResponse, VaultParams, VaultResponse, DepositParams, } from './types'
 //import reddio, particle from config
 import {reddio, particle, particleProvider, ConfirmationModal} from '../config'
@@ -50,7 +49,7 @@ const approve = async (amount: string, spender: string) => {
 export const depositERC20 = async (
     request: AxiosInstance,
     contractAddress: string,
-    params: DepositParams, // Using DepositParams
+    params: DepositParams,
     particle: any,
     assetDict: Asset
 ) => {
@@ -59,9 +58,6 @@ export const depositERC20 = async (
         contractAddress = '0x6D8909135Ce972189306347B1279252a96E72615'
         assetDict.tokenAddress = usdcContractAddress;
         const { assetType, assetId } = await getAssetTypeAndId(request, assetDict);
-        // const assetType = getAssetType(assetDict);
-        console.log('asset type:', assetType);
-
         await approve(params.quantizedAmount.toString(), usdcContractAddress);
 
         const { data } = await getVaultID(request, {
@@ -78,7 +74,6 @@ export const depositERC20 = async (
         }
         const particleProvider = new ParticleProvider(particle.auth);
         const ethersProvider = new ethers.providers.Web3Provider(particleProvider, 'any');
-        console.log('Contract Code:', ethersProvider.getCode(contractAddress));
         const signer = ethersProvider.getSigner();
         const contract = new ethers.Contract(contractAddress, abi, signer);
         const parsedAmount = ethers.utils.parseUnits(params.quantizedAmount.toString(), 6);
@@ -96,7 +91,6 @@ export const depositERC20 = async (
             gasPrice: ethers.utils.parseUnits('25', 'gwei')
             }
         );
-        console.log('test1');
         console.log('Transaction sent:', tx.hash);
         await tx.wait();
 

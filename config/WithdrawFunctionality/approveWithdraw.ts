@@ -2,8 +2,10 @@ import assert from 'assert';
 import { ethers } from 'ethers';
 import { prepareWriteContract, writeContract } from '@wagmi/core';
 import type { WriteContractResult } from '@wagmi/core';
+// @ts-ignore
 import { WithdrawalFromL1Params } from '../types';
 import abi from './Withdraw.abi.json';
+// @ts-ignore
 import { getERC721MBlob, Types } from '../utils';
 
 export const withdrawalFromL1 = async (
