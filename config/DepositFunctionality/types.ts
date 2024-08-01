@@ -154,3 +154,11 @@ export interface Asset {
   quantum?: number | string;
   tokenUrl?: string;
 }
+
+export interface WithdrawalFromL1Params {
+  ethAddress: string;
+  assetType: string;
+  type: `${Types}`
+  tokenId?: number;
+  tokenUrl?: string;
+}

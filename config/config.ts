@@ -29,8 +29,9 @@ import {depositERC20} from "./DepositFunctionality/depositErc20";
 // import {Telegram} from "telegraf";
 import axios, { AxiosInstance } from 'axios';
 import {Web3Provider} from "@ethersproject/providers";
-import {Types, Asset} from './DepositFunctionality/types'
-import {withdrawalFromL2} from "@/config/WithdrawFunctionality/withdrawFromLayer2";
+import {Types, Asset, WithdrawalFromL1Params, WithdrawalStatusParams} from './DepositFunctionality/types'
+import {withdrawalFromL2, withdrawalStatus} from "@/config/WithdrawFunctionality/withdrawFromLayer2";
+import {withdrawalFromL1} from "@/config/WithdrawFunctionality/approveWithdraw";
 
 console.log('tteessstt')
 let reddio: Reddio;
@@ -80,6 +81,8 @@ export const particle = new ParticleNetwork({
 });
 
 export const particleProvider = new ParticleProvider(particle.auth);
+export const ethersProvider = new ethers.providers.Web3Provider(particleProvider, "any");
+
 
 export const ConfirmationModal = () => {
     const { provider } = useEthereum();
@@ -90,6 +93,7 @@ export const ConfirmationModal = () => {
 
 const generateKey = async () => {
     // window.localStorage.removeItem("signature")
+
     if (typeof window !== "undefined" && window.localStorage) {
         if (window.localStorage.getItem("signature") === null) {
             if (!particle.auth.isLogin()) {
@@ -131,7 +135,7 @@ const generateKey = async () => {
 
 
 
-const erc20Address = "0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8"; // Replace with actual ERC20 contract address
+const erc20Address = "0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8";
 
 
 const depositUSDC = async (amount: number) => {
@@ -164,20 +168,20 @@ const depositUSDC = async (amount: number) => {
 
 
 const withdrawUSDC = async (amount: number) => {
-
+    const address = await particle.evm.getAddress()
     const params: SignTransferParams = {
         starkKey: key.publicKey,
         privateKey: key.privateKey,
         amount,
-        receiver: '0x6D8909135Ce972189306347B1279252a96E72615',
+        receiver: address!,
         type: 'ERC20',
         contractAddress: usdcContractAddress,
     };
-
-    return withdrawalFromL2(
-        request,
-        params
-    );
+    return reddio.apis.withdrawalFromL2(params)
+    // return withdrawalFromL2(
+    //     request,
+    //     params
+    // );
 }
 
 const getBalance = async () => {
@@ -188,28 +192,57 @@ const getBalance = async () => {
     return data
 }
 
+//to return how much USDC is available to withdraw to wallet
 const getWithdrawArea = async () => {
-    const { data } = await reddio.apis.withdrawalStatus({
-        ethaddress: getAccount().address!,
-        stage: 'withdrawarea',
-    });
+    console.log( reddio.apis.getRecords({
+  starkKey: key.publicKey,
+  page: 1,
+  limit: 10,
+  contractAddress: "0x941661bd1134dc7cc3d107bf006b8631f6e65ad5",
+  recordType: 0,
+}))
+
+    const testparams : WithdrawalStatusParams = {
+        ethaddress: particle.evm.getAddress(),
+        stage: 'withdrawarea'
+    }
+    console.log('withdraw status')
+    console.log( reddio.apis.withdrawalStatus(testparams))
+
+    console.log(await particle.evm.getAddress())
+    console.log('getWithdrawArea()');
+
+    const params : WithdrawalStatusParams = {
+        // @ts-ignore
+        ethAddress: await particle.evm.getAddress(),
+        stage: "withdrawarea"
+    }
+
+    const  { data }  = await  withdrawalStatus(
+        request,
+        params,
+    );
+    console.log(data.data[0].amount)
     return data
 }
 
-const getTransferApproveArea = async (address: string) => {
-    const { data } = await reddio.apis.withdrawalStatus({
-        ethaddress: address!,
-        stage: 'withdrawarea',
-    });
-    return data
-}
 
 const withdrawToWallet = async (item: any) => {
-    return reddio.apis.withdrawalFromL1({
-        ethAddress: getAccount().address!,
-        type: item.type,
-        assetType: item.asset_type,
-    });
+    console.log('withdrawToWallet()')
+
+    const params: WithdrawalFromL1Params = {
+    // @ts-ignore
+        ethAddress: await particle.evm.getAddress(),
+        assetType: Types.ERC20,
+        type: 'ERC20',
+    }
+
+
+
+    return withdrawalFromL1(
+        '0x6D8909135Ce972189306347B1279252a96E72615',
+        params
+    )
 }
 
 const transfer = async (amount: string, receiver: string): Promise<any> => {
@@ -234,8 +267,7 @@ const records = async ()  => {
         const response = await reddio.apis.getRecords(params);
         const responseData = response.data.data;
         const list = responseData.list;
-
-        console.log(typeof list);
+        console.log(list)
         return list;
     } catch (error) {
         console.error(error);
@@ -245,4 +277,4 @@ const records = async ()  => {
 
 
 
-export { initReddio, generateKey, depositUSDC, getBalance, withdrawUSDC, getWithdrawArea, withdrawToWallet, transfer, getTransferApproveArea, records, key }
+export { initReddio, generateKey, depositUSDC, getBalance, withdrawUSDC, getWithdrawArea, withdrawToWallet, transfer, records, key }

@@ -20,31 +20,6 @@ const erc20Abi = [
 ];
 
 
-const approve = async (amount: string, spender: string) => {
-  if (!particle.auth.isLogin()) {
-    console.log("waiting for login");
-    await particle.auth.login();
-  }
-
-  if (typeof window.ethereum !== "undefined") {
-    try {
-      const particleProvider = new ParticleProvider(particle.auth);
-      const ethersProvider = new ethers.providers.Web3Provider(particleProvider, "any");
-      const signer = ethersProvider.getSigner();
-      const erc20Contract = new ethers.Contract(usdcContractAddress, erc20Abi, signer);
-      const parsedAmount = ethers.utils.parseUnits(amount, 6);
-      const tx = await erc20Contract.approve(spender, parsedAmount);
-      console.log(`Transaction hash: ${tx.hash}`);
-      await tx.wait();
-      console.log("Transaction confirmed");
-    } catch (error) {
-      console.error(`Error: ${error}`);
-    }
-  } else {
-    console.log("No wallet");
-  }
-};
-
 export const withdrawalFromL2 = async (
   request: AxiosInstance,
   data: SignTransferParams,
@@ -63,3 +38,4 @@ export const withdrawalStatus = async (
     ...parseParams(params),
   },
 });
+

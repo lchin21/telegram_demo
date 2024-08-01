@@ -3,7 +3,7 @@ import {ParticleProvider} from "@particle-network/provider";
 // Optional
 import axios, {AxiosInstance} from 'axios';
 // @ts-ignore
-import abiJson from ' ';
+import abiJson from './Deposit.abi.json';
 import {Types, Asset, Response, ContractInfoParams, ContractInfoResponse, VaultParams, VaultResponse, DepositParams, } from './types'
 //import reddio, particle from config
 import {reddio, particle, particleProvider, ConfirmationModal} from '../config'
@@ -77,11 +77,7 @@ export const depositERC20 = async (
         const signer = ethersProvider.getSigner();
         const contract = new ethers.Contract(contractAddress, abi, signer);
         const parsedAmount = ethers.utils.parseUnits(params.quantizedAmount.toString(), 6);
-        console.log('Contract address:', contractAddress);
-        console.log('Asset Type:', assetType);
-        console.log('Vault ID:', vaultId);
-        console.log('Parsed Amount:', parsedAmount.toString());
-        console.log('Estimated Gas:', contract.estimatedGas);
+
         const tx = await contract.depositERC20(
             params.starkKey,
             assetType,
