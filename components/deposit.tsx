@@ -2,36 +2,32 @@ import React, {useCallback, useState} from "react";
 import {depositUSDC} from "@/config/config";
 import DynamicWidthInput from "@/components/dynamicEntryField";
 import Modal from "@/components/modal";
-import { particle } from "../config/config"
+import { particle,} from "../config/config"
+import {ParticleProvider} from "@particle-network/provider";
 export default function Deposit() {
 
+    const particleProvider = new ParticleProvider(particle.auth);
+
     const [amount, setAmount] = useState('')
+
+    const handleInputChange = (value: string) => {
+            setAmount(value);
+        }
+
+
     const deposit = useCallback(
         async (type: any) => {
-            try {
-                console.log(particle.auth.getUserInfo())
-                if (!particle.auth.isLogin()) {
-                    console.log("deposit: particle login: false")
-                // Request user login if needed, returns current user info
+            if (!particle.auth.isLogin()) {
                 const userInfo = await particle.auth.login();
-                    const address = await particle.evm.getAddress()
             }
-                console.log("test2")
-                await depositUSDC(amount)
+            try {
+                await depositUSDC(Number(amount))
             } catch (e) {
                 console.log(e);
             }
-        },
+            },
         [amount],
     );
-
-    const [inputValue, setInputValue] = useState("");
-
-    const handleInputChange = (value: string) => {
-        setAmount(value);
-    }
-
-
 
     return(
         <Modal title="Deposit" customButton={

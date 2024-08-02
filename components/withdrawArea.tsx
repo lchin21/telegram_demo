@@ -1,14 +1,11 @@
-import React, {useCallback, useState} from "react";
-import {getBalance, getWithdrawArea, withdrawToWallet, withdrawUSDC} from "@/config/config";
+import React, {useCallback} from "react";
+import {getBalance, getWithdrawArea, withdrawToWallet} from "@/config/config";
 import useSWR from "swr";
-import {ethers} from "ethers";
+import Modal from "@/components/modal";
 
 export default function WithdrawArea() {
-    const { data } = useSWR('getWithdrawArea', getWithdrawArea)
-
+    const {data} = useSWR('getWithdrawArea', getWithdrawArea)
     const value = data?.data[0]?.display_value || 0
-
-    const [amount, setAmount] = useState('')
     const withdraw = useCallback(
         async (type: any) => {
             try {
@@ -20,14 +17,20 @@ export default function WithdrawArea() {
         [data?.data],
     );
 
-    return <div>
-        <p className="Text">
-            You can withdraw {value} USDC to your wallet here.
-        </p>
-        <div
-            style={{ display: 'flex', marginTop: 20, justifyContent: 'flex-end' }}
-        >
-            <button className="Button green" onClick={withdraw}>Withdraw</button>
+
+    return <Modal title={"Approve"} customButton={
+        <button className="Button green flex justify-center ml-0" onClick={withdraw}>
+            Approve
+        </button>
+    }>
+        <div>
+            <p className="Text">
+                You can withdraw {value} USDC to your wallet here.
+            </p>
+            <div
+                style={{display: 'flex', marginTop: 20, justifyContent: 'flex-end'}}
+            >
+            </div>
         </div>
-    </div>
+    </Modal>
 }

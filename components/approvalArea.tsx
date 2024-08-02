@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from "react";
-import {getBalance, getWithdrawArea, withdrawToWallet, withdrawUSDC} from "@/config/config";
+import { getWithdrawArea, withdrawToWallet, } from "@/config/config";
 import useSWR from "swr";
 import {ethers} from "ethers";
 import Modal from "@/components/modal";

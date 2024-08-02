@@ -14,8 +14,11 @@ export default function Withdraw() {
         async (type: any) => {
             try {
                 await withdrawUSDC(Number(amount))
-            } catch (e) {
-                console.log(e);
+                console.log('withdraw function called')
+            } catch (error) {
+                console.log('withdraw not called');
+                // console.log(error);
+
             }
         },
         [amount],
@@ -36,7 +39,7 @@ export default function Withdraw() {
                 <DynamicWidthInput onChange={handleInputChange} entryType={"tel"}></DynamicWidthInput>
                 <label htmlFor="inputField" className="ml-1 text-2xl">USDC</label>
             </div>
-
+            <p>USDC may take several hours to reach withdrawal area</p>
         </Modal>
     )
 }
