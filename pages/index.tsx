@@ -77,7 +77,6 @@ useEffect(() => {
               <Transfer/>
               <Modal title="History"><History/></Modal>
               <Info/>
-              <b>Version 1</b>
           </div>
       </main>
   )

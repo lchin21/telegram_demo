@@ -39,7 +39,7 @@ export default function Withdraw() {
                 <DynamicWidthInput onChange={handleInputChange} entryType={"tel"}></DynamicWidthInput>
                 <label htmlFor="inputField" className="ml-1 text-2xl">USDC</label>
             </div>
-
+            <p>USDC may take several hours to reach withdrawal area</p>
         </Modal>
     )
 }
