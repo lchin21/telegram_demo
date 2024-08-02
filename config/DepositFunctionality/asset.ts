@@ -4,7 +4,7 @@ import { AxiosInstance } from 'axios';
 import assert from 'assert';
 import { hexToBuffer } from 'enc-utils';
 import { ethers } from 'ethers';
-import { getContractInfo } from '../contractInfo';
+import { getContractInfo } from '../WithdrawFunctionality/contractInfo';
 import { Asset } from './types';
 
 
