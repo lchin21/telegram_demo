@@ -6,7 +6,6 @@ import { hexToBuffer } from 'enc-utils';
 import { ethers } from 'ethers';
 import { getContractInfo } from '../contractInfo';
 import { Asset } from './types';
-import { getAssetId } from './assetId';
 
 
 
@@ -37,7 +36,7 @@ export const getAssetID = (args: Asset, contractType: string) => {
   const { type, ...data } = args;
   // @ts-ignore
   return asset.getAssetId({ type, data });
-};
+}; 
 
 // eslint-disable-next-line @typescript-eslint/default-param-last
 export const getERC721MBlob = (url = '', tokenId: string) =>

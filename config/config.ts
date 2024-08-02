@@ -150,10 +150,6 @@ const withdrawUSDC = async (amount: number) => {
         contractAddress: usdcContractAddress,
     };
     return reddio.apis.withdrawalFromL2(params)
-    // return withdrawalFromL2(
-    //     request,
-    //     params
-    // );
 }
 
 const getBalance = async () => {
@@ -171,26 +167,18 @@ const getWithdrawArea = async () => {
         ethaddress: address!,
         stage: 'withdrawarea',
     });
-    console.log(address)
-    console.log('approvewithdraw'
-    )
-    console.log(data)
-
     return data
 }
 
 
 const withdrawToWallet = async (item: any) => {
     console.log('withdrawToWallet()')
-
     const params: WithdrawalFromL1Params = {
     // @ts-ignore
         ethAddress: await particle.evm.getAddress(),
         assetType: Types.ERC20,
         type: 'ERC20',
     }
-
-
 
     return withdrawalFromL1(
         '0x6D8909135Ce972189306347B1279252a96E72615',
