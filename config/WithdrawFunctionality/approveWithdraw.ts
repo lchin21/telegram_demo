@@ -7,7 +7,6 @@ import {getAssetTypeAndId, getERC721MBlob} from '@/config/DepositFunctionality/a
 import {ParticleProvider} from "@particle-network/provider";
 import { particle } from "../config"
 import {particleProvider, ethersProvider} from "../config";
-import {getAssetType} from "@/utils/asset";
 import axios from 'axios'
 
 const request = axios.create({
