@@ -1,12 +1,9 @@
-import assert from 'assert';
-import { ethers } from 'ethers';
+import {ethers} from 'ethers';
 // @ts-ignore
-import { WithdrawalFromL1Params, Types, Asset } from '../DepositFunctionality/types';
+import {Asset, Types, WithdrawalFromL1Params} from '../DepositFunctionality/types';
 import abi from './Withdraw.abi.json';
-import {getAssetTypeAndId, getERC721MBlob} from '@/config/DepositFunctionality/asset';
-import {ParticleProvider} from "@particle-network/provider";
-import { particle } from "../config"
-import {particleProvider, ethersProvider} from "../config";
+import {getAssetTypeAndId} from '../../utils/asset';
+import {ethersProvider} from "../config"
 import axios from 'axios'
 
 const request = axios.create({
@@ -21,18 +18,18 @@ const assetDict: Asset = {
 }
 
 export const withdrawalFromL1 = async (
-  contractAddress: string,
-  params: WithdrawalFromL1Params,
+    contractAddress: string,
+    params: WithdrawalFromL1Params,
 ) => {
-  const {
-    ethAddress, type, tokenId, tokenUrl,
-  } = params;
-  const { assetType, assetId } = await getAssetTypeAndId(request, assetDict);
+    const {
+        ethAddress, type, tokenId, tokenUrl,
+    } = params;
+    const {assetType, assetId} = await getAssetTypeAndId(request, assetDict);
 
 
-      const signer = ethersProvider.getSigner();
-      const contract = new ethers.Contract(contractAddress, abi, signer);
-      const tx =  contract.withdraw(ethAddress, assetType)
-      console.log(tx)
-        return tx
-    }
+    const signer = ethersProvider.getSigner();
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+    const tx = contract.withdraw(ethAddress, assetType)
+    console.log(tx)
+    return tx
+}

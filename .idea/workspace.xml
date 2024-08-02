@@ -6,14 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="97bc6d90-8b17-42cc-a721-0ec847eb3939" name="Changes" comment="withdraw">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/approvalArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/approvalArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/deposit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/deposit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/erc20Approval.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/erc20Approval.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/erc20Deposit.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/logOut.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/logOut.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/modal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/modal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/scriptLoader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/scriptLoader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/DepositFunctionality/asset.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/DepositFunctionality/depositErc20.ts" beforeDir="false" afterPath="$PROJECT_DIR$/config/DepositFunctionality/depositErc20.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/WithdrawFunctionality/approveWithdraw.ts" beforeDir="false" afterPath="$PROJECT_DIR$/config/WithdrawFunctionality/approveWithdraw.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/asset.ts" beforeDir="false" afterPath="$PROJECT_DIR$/utils/asset.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +120,7 @@
       <workItem from="1722480856851" duration="150000" />
       <workItem from="1722481041720" duration="9860000" />
       <workItem from="1722566684178" duration="29000" />
-      <workItem from="1722566727852" duration="6146000" />
+      <workItem from="1722566727852" duration="9221000" />
     </task>
     <task id="LOCAL-00001" summary="Added transfer">
       <option name="closed" value="true" />
@@ -269,7 +266,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722571590958</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="withdraw">
+      <option name="closed" value="true" />
+      <created>1722580448142</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1722580448142</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

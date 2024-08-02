@@ -1,13 +1,11 @@
-// @ts-ignore
 import { asset } from '@starkware-industries/starkware-crypto-utils';
 import { AxiosInstance } from 'axios';
 import assert from 'assert';
 import { hexToBuffer } from 'enc-utils';
 import { ethers } from 'ethers';
-import { getContractInfo } from '../WithdrawFunctionality/contractInfo';
-import { Asset } from './types';
-
-
+import { getContractInfo } from '@/config/WithdrawFunctionality/contractInfo';
+import { Asset } from '@/config/DepositFunctionality/types';
+import { getAssetId } from '@/lib/asset';
 
 const setQuantum = async (request: AxiosInstance, data: Asset) => {
   if (!data.quantum) {
@@ -34,9 +32,11 @@ export const getAssetType = (args: Omit<Asset, 'tokenId' | 'blob'>) => {
 
 export const getAssetID = (args: Asset, contractType: string) => {
   const { type, ...data } = args;
-  // @ts-ignore
-  return asset.getAssetId({ type, data });
-}; 
+  return contractType === 'ERC721MC'
+    ? getAssetId({ type, data })
+        // @ts-ignore
+    : asset.getAssetId({ type, data });
+};
 
 // eslint-disable-next-line @typescript-eslint/default-param-last
 export const getERC721MBlob = (url = '', tokenId: string) =>
@@ -44,6 +44,7 @@ export const getERC721MBlob = (url = '', tokenId: string) =>
     ['uint256', 'bytes'],
     [tokenId, ethers.utils.hexlify(ethers.utils.toUtf8Bytes(url))]
   );
+
 
 export const getAssetTypeAndId = async (
   request: AxiosInstance,
