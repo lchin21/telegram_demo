@@ -6,7 +6,7 @@ import { Cross2Icon } from '@radix-ui/react-icons';
 interface ModalProps {
   children: ReactNode;
   title: string;
-  customButton?: ReactNode; // Define prop for custom button component
+  customButton?: ReactNode;
 }
 
 export function Modal({ children, title, customButton }: ModalProps): React.JSX.Element {

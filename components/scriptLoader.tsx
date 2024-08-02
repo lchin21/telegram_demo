@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 // @ts-ignore
 const ScriptLoader = ({ src }: string) => {

@@ -3,9 +3,6 @@ import {depositUSDC} from "@/config/config";
 import DynamicWidthInput from "@/components/dynamicEntryField";
 import Modal from "@/components/modal";
 import { particle,} from "../config/config"
-import {useParticleProvider} from "@particle-network/connectkit";
-import {useEthereum, useConnect} from "@particle-network/auth-core-modal";
-import {ethers} from "ethers";
 import {ParticleProvider} from "@particle-network/provider";
 export default function Deposit() {
 

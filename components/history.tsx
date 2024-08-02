@@ -2,8 +2,7 @@ import React from "react";
 import { records, key } from "@/config/config";
 import useSWR from "swr";
 import { format } from "date-fns";
-import {ethers} from "ethers";
-import Modal from "./modal"
+
 
 function historyCard(amount: number, type: number, time: number, from: string) {
     let transactionType = ""

@@ -1,7 +1,11 @@
-import React from 'react';
+import { particle } from '../config/config'
+
 
 export default function LogOut () {
-    window.localStorage.clear();
-    console.log('Log Out');
+    particle.auth.logout().then(() => {
+        console.log("logout");
+    window.localStorage.clear()
+})
 }
+
 

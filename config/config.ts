@@ -1,12 +1,11 @@
-import {Reddio, SignTransferParams, RecordsParams, StarkKeyParams} from "@reddio.com/js";
-import {BigNumber, ethers} from "ethers";
-import {ParticleNetwork, WalletEntryPosition, EVMProvider} from '@particle-network/auth';
+import {Reddio, SignTransferParams, RecordsParams, } from "@reddio.com/js";
+import { ethers} from "ethers";
+import {ParticleNetwork, WalletEntryPosition, } from '@particle-network/auth';
 import { ParticleProvider, } from "@particle-network/provider";
-import {useEthereum, useConnect,} from "@particle-network/auth-core-modal";
-import {  } from "@particle-network/aa"
+import {useEthereum, } from "@particle-network/auth-core-modal";
 import {depositERC20} from "./DepositFunctionality/depositErc20";
-import axios, { AxiosInstance } from 'axios';
-import {Types, Asset, WithdrawalFromL1Params, WithdrawalStatusParams} from './DepositFunctionality/types'
+import axios from 'axios';
+import {Types, Asset, WithdrawalFromL1Params} from './DepositFunctionality/types'
 import {withdrawalFromL1} from "@/config/WithdrawFunctionality/approveWithdraw";
 
 let reddio: Reddio;
@@ -29,9 +28,8 @@ const initReddio = () => {
     }
 };
 
-export {reddio};
 
-export const particle = new ParticleNetwork({
+const particle = new ParticleNetwork({
   projectId: "ac297642-d52d-46dc-9437-2afafdc87edf",
   clientKey: "cTHMhkM3NSaoZNYWOgz1USNAxqXRRfxkrfN8NlMn",
   appId: "468d50a2-a253-49c8-82b8-8647f682bed1",
@@ -60,18 +58,13 @@ export const ethersProvider = new ethers.providers.Web3Provider(particleProvider
 
 export const ConfirmationModal = () => {
     const { provider } = useEthereum();
-
-    const ethersProvider = new ethers.providers.Web3Provider(provider, "any");
 }
 
 
 const generateKey = async () => {
-    // window.localStorage.removeItem("signature")
-
     if (typeof window !== "undefined" && window.localStorage) {
         if (window.localStorage.getItem("signature") === null) {
             if (!particle.auth.isLogin()) {
-                // Request user login if needed, returns current user info
                 const userInfo = await particle.auth.login();
             }
 
@@ -94,15 +87,11 @@ const generateKey = async () => {
 
             const provider = new ParticleProvider(particle.auth);
             const result = await provider.request({method: 'personal_sign_uniq', params: [address, message]});
-            console.log("cloud storage:")
+            //cloud storage, should remove once particle-telegram connection is implemented
             window.localStorage.setItem("signature", result)
-            console.log(result)
-            console.log(window.localStorage.getItem("signature"));
             key = reddio.keypair.generateFromSignTypedData(result);
         } else {
             key = reddio.keypair.generateFromSignTypedData(window.localStorage.getItem("signature")!)
-            console.log("signature")
-            console.log(key)
         }
     }
 }
@@ -113,7 +102,6 @@ const depositUSDC = async (amount: number) => {
     if (!address) {
         throw new Error("Failed to retrieve the address.");
     }
-    console.log(`User address: ${address}`);
 
     const assetDict: Asset = {
         type: Types.ERC20,
@@ -121,7 +109,7 @@ const depositUSDC = async (amount: number) => {
 
     };
 
-    const result = await depositERC20(
+const result = await depositERC20(
         request,
         usdcContractAddress,
         {
@@ -132,15 +120,13 @@ const depositUSDC = async (amount: number) => {
         assetDict
       );
 
-    console.log(`Deposit result: ${JSON.stringify(result)}`);
     return result;
 };
 
 
 const withdrawUSDC = async (amount: number) => {
     const address = await particle.evm.getAddress()
-    console.log('withdrawUSDC')
-    console.log(address)
+
     const params: SignTransferParams = {
         starkKey: key.publicKey,
         privateKey: key.privateKey,
@@ -173,7 +159,6 @@ const getWithdrawArea = async () => {
 
 
 const withdrawToWallet = async (item: any) => {
-    console.log('withdrawToWallet()')
     const params: WithdrawalFromL1Params = {
     // @ts-ignore
         ethAddress: await particle.evm.getAddress(),
@@ -209,15 +194,13 @@ const records = async ()  => {
     try {
         const response = await reddio.apis.getRecords(params);
         const responseData = response.data.data;
-        const list = responseData.list;
-        console.log(list)
-        return list;
+        return responseData.list;
+
     } catch (error) {
-        console.error(error);
         throw error;
     }
 }
 
 
 
-export { initReddio, generateKey, depositUSDC, getBalance, withdrawUSDC, getWithdrawArea, withdrawToWallet, transfer, records, key }
+export { initReddio, generateKey, depositUSDC, getBalance, withdrawUSDC, getWithdrawArea, withdrawToWallet, transfer, records, key, reddio, particle }
