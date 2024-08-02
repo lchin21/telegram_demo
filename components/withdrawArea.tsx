@@ -2,20 +2,18 @@ import React, {useCallback, useState, useEffect} from "react";
 import {getBalance, getWithdrawArea, particle, withdrawToWallet, withdrawUSDC} from "@/config/config";
 import useSWR from "swr";
 import {ethers} from "ethers";
+import Modal from "@/components/modal";
 
 
 
 export default function WithdrawArea() {
-    // const { data } =  useSWR('getWithdrawArea', getWithdrawArea)
-      const [amount, setAmount] = useState('')
+    const [amount, setAmount] = useState('')
     const [responseData, setResponseData] = useState({})
 
 
-
-    useEffect (() => {
+    useEffect(() => {
         const getData = async () => {
             const response = await getWithdrawArea()
-            const responseData = response.data
             console.log(responseData)
             // @ts-ignore
             setAmount(responseData.data.data[0].amount)
@@ -25,7 +23,6 @@ export default function WithdrawArea() {
         getData();
     }, []);
 
-    // const value = getData()
 
     console.log(amount)
     const withdraw = useCallback(
@@ -39,14 +36,20 @@ export default function WithdrawArea() {
         [amount],
     );
 
-    return <div>
-        <p className="Text">
-            You can withdraw {amount} USDC to your wallet here.
-        </p>
-        <div
-            style={{ display: 'flex', marginTop: 20, justifyContent: 'flex-end' }}
-        >
-            <button className="Button green" onClick={withdraw}>Withdraw</button>
+
+    return <Modal title={"Approve"} customButton={
+        <button className="Button green flex justify-center ml-0" onClick={withdraw}>
+            Approve
+        </button>
+    }>
+        <div>
+            <p className="Text">
+                You can withdraw {amount} USDC to your wallet here.
+            </p>
+            <div
+                style={{display: 'flex', marginTop: 20, justifyContent: 'flex-end'}}
+            >
+            </div>
         </div>
-    </div>
+    </Modal>
 }

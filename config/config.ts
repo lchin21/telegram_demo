@@ -1,39 +1,14 @@
 import {Reddio, SignTransferParams, RecordsParams, StarkKeyParams} from "@reddio.com/js";
 import {BigNumber, ethers} from "ethers";
-import {
-    getAccount,
-    InjectedConnector,
-    prepareWriteContract,
-    readContract,
-    SendTransactionResult, sepolia,
-    writeContract,
-    connect,
-
-} from "@wagmi/core";
-// @ts-ignore
-import WebApp from '@twa-dev/sdk';
-import {arrayOutputType} from "zod";
-import Modal from "../components/modal"
-import {useEffect, useState} from "react";
 import {ParticleNetwork, WalletEntryPosition, EVMProvider} from '@particle-network/auth';
 import { ParticleProvider, } from "@particle-network/provider";
 import {useEthereum, useConnect,} from "@particle-network/auth-core-modal";
-import { walletEntryPlugin, EntryPosition, } from '@particle-network/wallet'
-import {Ethereum, EthereumSepolia} from "@particle-network/chains"; // Optional
-import abi from "./DepositFunctionality/Deposit.abi.json"
-import {erc20Approve} from "@/components/erc20Approval";
-import { useParticleProvider }  from "@particle-network/connectkit"
 import {  } from "@particle-network/aa"
-import  EvmService from "@particle-network/auth/lib/types/service/evmService";
 import {depositERC20} from "./DepositFunctionality/depositErc20";
-// import {Telegram} from "telegraf";
 import axios, { AxiosInstance } from 'axios';
-import {Web3Provider} from "@ethersproject/providers";
 import {Types, Asset, WithdrawalFromL1Params, WithdrawalStatusParams} from './DepositFunctionality/types'
-import {withdrawalFromL2, withdrawalStatus} from "@/config/WithdrawFunctionality/withdrawFromLayer2";
 import {withdrawalFromL1} from "@/config/WithdrawFunctionality/approveWithdraw";
 
-console.log('tteessstt')
 let reddio: Reddio;
 let key: {
     privateKey: string;
@@ -55,7 +30,6 @@ const initReddio = () => {
 };
 
 export {reddio};
-
 
 export const particle = new ParticleNetwork({
   projectId: "ac297642-d52d-46dc-9437-2afafdc87edf",
@@ -134,10 +108,6 @@ const generateKey = async () => {
 }
 
 
-
-const erc20Address = "0x94a9D9AC8a22534E3FaCa9F4e7F2E2cf85d5E4C8";
-
-
 const depositUSDC = async (amount: number) => {
     const address = await particle.evm.getAddress();
     if (!address) {
@@ -169,6 +139,8 @@ const depositUSDC = async (amount: number) => {
 
 const withdrawUSDC = async (amount: number) => {
     const address = await particle.evm.getAddress()
+    console.log('withdrawUSDC')
+    console.log(address)
     const params: SignTransferParams = {
         starkKey: key.publicKey,
         privateKey: key.privateKey,
@@ -194,35 +166,16 @@ const getBalance = async () => {
 
 //to return how much USDC is available to withdraw to wallet
 const getWithdrawArea = async () => {
-    console.log( reddio.apis.getRecords({
-  starkKey: key.publicKey,
-  page: 1,
-  limit: 10,
-  contractAddress: "0x941661bd1134dc7cc3d107bf006b8631f6e65ad5",
-  recordType: 0,
-}))
+    const address = await particle.evm.getAddress();
+    const { data } = await reddio.apis.withdrawalStatus({
+        ethaddress: address!,
+        stage: 'withdrawarea',
+    });
+    console.log(address)
+    console.log('approvewithdraw'
+    )
+    console.log(data)
 
-    const testparams : WithdrawalStatusParams = {
-        ethaddress: particle.evm.getAddress(),
-        stage: 'withdrawarea'
-    }
-    console.log('withdraw status')
-    console.log( reddio.apis.withdrawalStatus(testparams))
-
-    console.log(await particle.evm.getAddress())
-    console.log('getWithdrawArea()');
-
-    const params : WithdrawalStatusParams = {
-        // @ts-ignore
-        ethAddress: await particle.evm.getAddress(),
-        stage: "withdrawarea"
-    }
-
-    const  { data }  = await  withdrawalStatus(
-        request,
-        params,
-    );
-    console.log(data.data[0].amount)
     return data
 }
 

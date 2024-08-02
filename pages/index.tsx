@@ -73,7 +73,7 @@ useEffect(() => {
               {/*    <Deposit/></Modal>*/}
               <Deposit/>
               <Withdraw/>
-              <ApprovalArea/>
+              <WithdrawArea/>
               <Transfer/>
               <Modal title="History"><History/></Modal>
               <Info/>

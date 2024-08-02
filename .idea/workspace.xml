@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="97bc6d90-8b17-42cc-a721-0ec847eb3939" name="Changes" comment="particle network">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/withdrawArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/withdrawArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/DepositFunctionality/depositErc20.ts" beforeDir="false" afterPath="$PROJECT_DIR$/config/DepositFunctionality/depositErc20.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/DepositFunctionality/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/config/DepositFunctionality/types.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/WithdrawFunctionality/approveWithdraw.ts" beforeDir="false" afterPath="$PROJECT_DIR$/config/WithdrawFunctionality/approveWithdraw.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/WithdrawFunctionality/withdrawFromLayer2.ts" beforeDir="false" afterPath="$PROJECT_DIR$/config/WithdrawFunctionality/withdrawFromLayer2.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,6 +117,7 @@
       <workItem from="1722228982734" duration="10798000" />
       <workItem from="1722480856851" duration="150000" />
       <workItem from="1722481041720" duration="9860000" />
+      <workItem from="1722566684178" duration="29000" />
     </task>
     <task id="LOCAL-00001" summary="Added transfer">
       <option name="closed" value="true" />
