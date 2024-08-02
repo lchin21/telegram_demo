@@ -55,8 +55,6 @@ export default function App({ Component, pageProps }: AppProps) {
         },
       }}
      >
-        <ScriptLoader src={"https://telegram.org/js/telegram-web-app.js"}></ScriptLoader>
-
             <Component {...pageProps} />
         </AuthCoreContextProvider>
 
