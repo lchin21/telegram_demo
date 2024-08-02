@@ -27,6 +27,7 @@ const setQuantum = async (request: AxiosInstance, data: Asset) => {
 
 export const getAssetType = (args: Omit<Asset, 'tokenId' | 'blob'>) => {
   const { type, ...data } = args;
+  // @ts-ignore
   return asset.getAssetType({ type, data });
 };
 
@@ -34,6 +35,7 @@ export const getAssetID = (args: Asset, contractType: string) => {
   const { type, ...data } = args;
   return contractType === 'ERC721MC'
     ? getAssetId({ type, data })
+        // @ts-ignore
     : asset.getAssetId({ type, data });
 };
 
