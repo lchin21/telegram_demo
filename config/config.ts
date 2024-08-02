@@ -167,6 +167,7 @@ const getWithdrawArea = async () => {
         ethaddress: address!,
         stage: 'withdrawarea',
     });
+
     return data
 }
 
@@ -185,6 +186,7 @@ const withdrawToWallet = async (item: any) => {
         params
     )
 }
+
 
 const transfer = async (amount: string, receiver: string): Promise<any> => {
     const params: SignTransferParams = {
